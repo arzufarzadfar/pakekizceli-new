@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200128113211_assqj.cs" />
+    <Compile Remove="Migrations\20200128113211_assqj.Designer.cs" />
+    <Compile Remove="Migrations\20200130061657_b1.cs" />
+    <Compile Remove="Migrations\20200130061657_b1.Designer.cs" />
+    <Compile Remove="Migrations\20200130061803_b1s.cs" />
+    <Compile Remove="Migrations\20200130061803_b1s.Designer.cs" />
+    <Compile Remove="Migrations\20200130061849_b1s.cs" />
+    <Compile Remove="Migrations\20200130061849_b1s.Designer.cs" />
+    <Compile Remove="Migrations\20200130061953_b1ss.cs" />
+    <Compile Remove="Migrations\20200130061953_b1ss.Designer.cs" />
+    <Compile Remove="Migrations\20200130063824_b1sss.cs" />
+    <Compile Remove="Migrations\20200130063824_b1sss.Designer.cs" />
+    <Compile Remove="Migrations\20200130063948_b1sssa.cs" />
+    <Compile Remove="Migrations\20200130063948_b1sssa.Designer.cs" />
+    <Compile Remove="Migrations\20200130065355_b1sssas.cs" />
+    <Compile Remove="Migrations\20200130065355_b1sssas.Designer.cs" />
+    <Compile Remove="Migrations\20200130070113_c1.cs" />
+    <Compile Remove="Migrations\20200130070113_c1.Designer.cs" />
+    <Compile Remove="Migrations\20200130070638_c1s.cs" />
+    <Compile Remove="Migrations\20200130070638_c1s.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Analyzers" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Api.Analyzers" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="Zen.Barcode.Rendering.Framework" Version="3.1.10729.1" />
+  </ItemGroup>
+
+
+</Project>
