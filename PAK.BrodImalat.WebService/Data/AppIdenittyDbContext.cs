@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PAK.BrodImalat.WebService.ModelsTokenUser;
 
 namespace PAK.BrodImalat.WebService.Data
 {
@@ -31,6 +32,7 @@ namespace PAK.BrodImalat.WebService.Data
         public DbSet<User> users { get; set; }
         public DbSet<Implamentaion> implamentaions { get; set; }
         public DbSet<PAK.BrodImalat.WebService.Models.Student> Student { get; set; }
+       //public DbSet<PAK.BrodImalat.WebService.ModelsTokenUser.AspNetUsersModels> AspNetUsersModels { get; set; }
 
         /////////////////////////////////////////
         ///
@@ -41,3 +43,4 @@ namespace PAK.BrodImalat.WebService.Data
 
     }
 }
+

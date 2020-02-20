@@ -11,8 +11,6 @@ namespace PAK.BrodImalat.WebService.Repository
         public List<T> Entities { get; set; }
         public int EntitiesCount { get; set; }
 
-
-
         public ServiceResponse()
 
         {

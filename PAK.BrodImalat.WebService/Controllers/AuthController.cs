@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             [HttpPost]
             [Route("login")]
+            [EnableCors("MyPolicy")]
             public async Task<IActionResult> Login([FromBody] LoginModel model)
             {
                 ServiceResponse<LoginModel> response = new ServiceResponse<LoginModel>();

@@ -40,9 +40,16 @@ namespace PAK.BrodImalat.WebService
             services.AddScoped<Controllers.ClientsController>();
             services.AddDbContext<AppIdenittyDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:MyConnection"]));
 
+            services.AddCors(o  => o.AddPolicy ("MyPolicy",  builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+
+            }));
 
 
-           
+
 
             //services.AddTransient<IGetNewOrderService, GetNewOrderManager>();
             //services.AddTransient<IGetNewOrderRepository, GetNewOrderDal>();
@@ -52,7 +59,7 @@ namespace PAK.BrodImalat.WebService
 
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-               .AddEntityFrameworkStores<PakEkizcelibrode2Context>()
+               .AddEntityFrameworkStores<AppIdenittyDbContext>()
                .AddDefaultTokenProviders();
 
             services.AddAuthentication(Options =>           //braye estefade postman
@@ -81,7 +88,7 @@ namespace PAK.BrodImalat.WebService
 
             services.AddDbContext<GO3DbContext>(opts2 => opts2.UseSqlServer(Configuration["ConnectionString:MyConnection2"]));
 
-            //services.AddDbContext<PakEkizcelibrode2Context>(opts2 => opts2.UseSqlServer(Configuration["ConnectionString:MyConnection"]));
+           services.AddDbContext<PakEkizcelibrode2Context>(opts2 => opts2.UseSqlServer(Configuration["ConnectionString:MyConnection"]));
 
 
         }
@@ -99,11 +106,12 @@ namespace PAK.BrodImalat.WebService
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(builder =>
-            //builder.WithOrigins("")
-            builder.AllowAnyOrigin()
+            app.UseCors("MyPolicy");
+            
 
-            );
+            
+
+          
 
             app.UseAuthorization();
 

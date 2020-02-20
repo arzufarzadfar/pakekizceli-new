@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {}
+    "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {}
   },
   "projects": {
-    "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {
+    "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
+        "projectUniqueName": "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
         "projectName": "PAK.BrodImalat.WebService",
-        "projectPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
+        "projectPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
         "packagesPath": "C:\\Users\\arzu\\.nuget\\packages\\",
-        "outputPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\obj\\",
+        "outputPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\arzu\\AppData\\Roaming\\NuGet\\NuGet.Config",
