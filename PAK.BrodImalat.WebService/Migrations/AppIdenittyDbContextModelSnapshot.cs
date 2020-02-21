@@ -202,6 +202,12 @@ namespace PAK.BrodImalat.WebService.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<string>("firsName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -456,29 +462,6 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.ToTable("status");
                 });
 
-            modelBuilder.Entity("PAK.BrodImalat.WebService.Models.Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Fam")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GropId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GropId");
-
-                    b.ToTable("Student");
-                });
-
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -513,21 +496,6 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("PAK.BrodImalat.WebService.Models.grop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("grop");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -608,15 +576,6 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.HasOne("PAK.BrodImalat.WebService.Models.Order", "Order")
                         .WithMany("orderDetails")
                         .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("PAK.BrodImalat.WebService.Models.Student", b =>
-                {
-                    b.HasOne("PAK.BrodImalat.WebService.Models.grop", "grop")
-                        .WithMany("students")
-                        .HasForeignKey("GropId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

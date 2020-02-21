@@ -44,18 +44,22 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
         // GET: api/OrderDetails/getOrders
-        [HttpGet("getorders")]
-        public async Task<ActionResult<OrderDetail>> GetOrderDetailGetOrders()
+
+        [Route("getorders")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getorder()
         {
             var orderDetail = await _context.orderDetails
                 .Include(p => p.Order)
                 .Include(p => p.Item)
                 .Include(p => p.Order.Client)
                .Include(p => p.AltUnit)
-
                 .ToListAsync();
 
-           
+            if (orderDetail == null)
+            {
+                return NotFound();
+            }
 
             return Ok(orderDetail);
         }
@@ -63,21 +67,28 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-        //public IEnumerable<OrderDetail> GetAll()
-        //{
 
 
-        //    var orderDetail = _context.orderDetails
-        //          .Include(p => p.Order)
-        //        .Include(p => p.Item)
-        //        .Include(p => p.Order.Client)
-        //       .Include(p => p.AltUnit)
 
-        //        .ToList();
+        ////public async Task<ActionResult<OrderDetail>> GetOrderDetailGetOrders()
+        ////{
+        ////    var orderDetail = await _context.orderDetails
+        ////        .Include(p => p.Order)
+        ////        .Include(p => p.Item)
+        ////        .Include(p => p.Order.Client)
+        ////       .Include(p => p.AltUnit)
+
+        ////        .ToListAsync();
 
 
-        //    return orderDetail;
-        //}
+
+        ////    return Ok(orderDetail);
+        ////}
+
+
+
+
+
 
         // PUT: api/OrderDetails/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for

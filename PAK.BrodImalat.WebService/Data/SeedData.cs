@@ -27,12 +27,14 @@ namespace PAK.BrodImalat.WebService.Data
             ApplicationUser user = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
-                Email = "arzu@gmail.com",
-                UserName = "arzu@gmail.com"
+                Email = "gizem@gmail.com",
+                UserName = "gizem@gmail.com",
+                firsName = "Gizem",
+                lastName = "Zorba"
+
 
             };
-            if (!context.Users.Any())    //// dar sorat nabod dar data base
-            {
+            
 
 
 
@@ -40,7 +42,7 @@ namespace PAK.BrodImalat.WebService.Data
 
 
 
-                await userManager.CreateAsync(user, "Arzu@123");
+                await userManager.CreateAsync(user, "Gizem@123");
 
 
 
@@ -64,7 +66,7 @@ namespace PAK.BrodImalat.WebService.Data
                 }
             }
 
-        }
+        
 
 
 

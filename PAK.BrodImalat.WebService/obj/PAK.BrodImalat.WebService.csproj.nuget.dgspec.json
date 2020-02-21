@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {}
+    "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {}
   },
   "projects": {
-    "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {
+    "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
+        "projectUniqueName": "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
         "projectName": "PAK.BrodImalat.WebService",
-        "projectPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
+        "projectPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\PAK.BrodImalat.WebService.csproj",
         "packagesPath": "C:\\Users\\arzu\\.nuget\\packages\\",
-        "outputPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli\\PAK.BrodImalat.WebService\\obj\\",
+        "outputPath": "D:\\atasayar\\pakekizceli-new\\PakEkizceli-core-new\\PakEkizceli-core-new\\PAK.BrodImalat.WebService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\arzu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[2.2.6, )"
             },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.1, )"
@@ -75,6 +79,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
             },
             "System.Drawing.Common": {
               "target": "Package",

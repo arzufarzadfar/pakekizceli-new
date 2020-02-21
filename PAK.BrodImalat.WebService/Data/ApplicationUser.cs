@@ -8,5 +8,7 @@ namespace PAK.BrodImalat.WebService.Data
 {
     public class ApplicationUser : IdentityUser
     {
+        public string firsName { get; set; }
+        public string lastName { get; set; }
     }
 }
