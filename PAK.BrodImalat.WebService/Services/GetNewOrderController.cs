@@ -22,28 +22,28 @@ namespace PAK.BrodImalat.WebService.Services
 
         [HttpGet]
       //  [GetCarException]
-        public IActionResult Get()
-        {
+        //public IActionResult Get()
+        //{
 
-            //var responser = getNewOrderService.GetEx(x => x.Id > 0).Select(x => new Order
+            //var responser = getNewOrderService.GetEx(x => x.Statu == 0).Select(x => new Order
             //{
             //    Id = x.Id,
             //    CreateTime = x.CreateTime,
             //    ClientId = x.ClientId
 
 
-            //}).FirstOrDefault()
+            //}).FirstOrDefault();
 
             //return Ok(responser);
 
 
-            var Entities = getNewOrderService.GetAll().Select(x => new { x.Id, x.CreateTime, x.ClientId }).ToList();
+            //var Entities = getNewOrderService.GetAll().Select(x => new { x.Id, x.CreateTime, x.ClientId }).ToList();
 
 
-            //response.EntitiesCount = response.Entities.Count();
-            return Ok(Entities);
+            ////response.EntitiesCount = response.Entities.Count();
+            //return Ok(Entities);
 
-        }
+        //}
 
 
         //  [HttpGet]

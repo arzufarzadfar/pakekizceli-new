@@ -185,7 +185,7 @@ namespace PAK.BrodImalat.WebService.ControlerLogo
                 order.Id = item.Order.orderId;
                 order.FicheNo = item.Order.FicheNo;
                 order.ClientId = item.Order.clientid;
-                order.Statu = 0;
+                order.statusId = 1;
                 order1.PostOrder(order);
 
 

@@ -18,7 +18,7 @@ namespace PAK.BrodImalat.WebService.Models
         public string Rope { get; set; }
         public string Pattern { get; set; }
         public string Strike{ get; set; }
-        public List<OrderDetail> orderDetails { get; set; }
+        //public List<OrderDetail> orderDetails { get; set; }
 
     }
 }

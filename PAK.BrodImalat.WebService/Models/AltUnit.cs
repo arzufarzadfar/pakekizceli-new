@@ -19,7 +19,7 @@ namespace PAK.BrodImalat.WebService.Models
         
         public MainUnit MainUnit { get; set; }
 
-        public List<OrderDetail> orderDetails { get; set; }
+        //public List<OrderDetail> orderDetails { get; set; }
 
     }
 }

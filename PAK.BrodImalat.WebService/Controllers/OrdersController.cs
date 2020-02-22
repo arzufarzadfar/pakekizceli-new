@@ -42,17 +42,23 @@ namespace PAK.BrodImalat.WebService.Controllers
             return order;
         }
 
+        [HttpGet("getneworder")]
+        public async Task<ActionResult<Order>> Get(int id)
+        {
 
+           
+            var neworder1 = _context.orders.Where(x => x.statusId == 1)
+                .Include(p=>p.Client)
+                .ToList();
 
+           
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
 
-
-
-
-
-
-
-
-
+            return Ok(neworder1);
+        }
 
 
         // PUT: api/Orders/5
@@ -118,29 +124,29 @@ namespace PAK.BrodImalat.WebService.Controllers
         //////}
 
 
-        [Route("putstatu/{id}")]
-        [HttpPut]
-        public IActionResult PutStatu(int id, [FromBody] Order model)
-        {
-            if (model==null || model.Id!=id)
-            {
+        ////////////////[Route("putstatu/{id}")]
+        ////////////////[HttpPut]
+        ////////////////public IActionResult PutStatu(int id, [FromBody] Order model)
+        ////////////////{
+        ////////////////    if (model==null || model.Id!=id)
+        ////////////////    {
 
-                return BadRequest();
+        ////////////////        return BadRequest();
 
-            }
+        ////////////////    }
 
-            var item = _context.orders.Find(id);
-            if (item==null)
-            {
-                return NotFound();
-            }
-            item.Statu = model.Statu;
-            _context.SaveChanges();
-            return Ok(item);
+        ////////////////    var item = _context.orders.Find(id);
+        ////////////////    if (item==null)
+        ////////////////    {
+        ////////////////        return NotFound();
+        ////////////////    }
+        ////////////////    item.Statu = model.Statu;
+        ////////////////    _context.SaveChanges();
+        ////////////////    return Ok(item);
 
 
 
-        }
+        ////////////////}
 
 
 

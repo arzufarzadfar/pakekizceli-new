@@ -12,14 +12,17 @@ namespace PAK.BrodImalat.WebService.Models
        
         public string FicheNo { get; set; }
 
-        public int Statu { get; set; }
+        public int? statusId { get; set; }
+
+
+        public Status status { get; set; }
 
 
         public int? ClientId { get; set; }
 
         public Client Client { get; set; }
 
-        public List<OrderDetail> orderDetails { get; set; }
+        //public List<OrderDetail> orderDetails { get; set; }
 
 
     }

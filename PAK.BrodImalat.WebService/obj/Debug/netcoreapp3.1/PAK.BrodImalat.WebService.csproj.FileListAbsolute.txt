@@ -1259,10 +1259,16 @@ C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.W
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.csprojAssemblyReference.cache
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\staticwebassets\PAK.BrodImalat.WebService.StaticWebAssets.Manifest.cache
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\staticwebassets\PAK.BrodImalat.WebService.StaticWebAssets.xml
-C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.AssemblyInfoInputs.cache
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.AssemblyInfo.cs
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.RazorTargetAssemblyInfo.cache
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.csproj.CopyComplete
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.dll
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.pdb
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\libman.json
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.MvcApplicationPartsAssemblyInfo.cache

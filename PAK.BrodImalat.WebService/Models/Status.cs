@@ -11,10 +11,12 @@ namespace PAK.BrodImalat.WebService.Models
     {
        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string StatuName { get; set; }
+
+        public int StatuCode { get; set; }
 
 
-        
+        //public List<Order> order { get; set; }
 
 
 

@@ -96,13 +96,14 @@ namespace PAK.BrodImalat.WebService.Controllers
                     lastName = user.lastName,
                     message = "Giriş Başarılı",
 
+
+
+
+
                 }); ;
 
-
-
-
             }
-                else
+            else
                 {
                     return BadRequest(new
                     {
@@ -112,13 +113,9 @@ namespace PAK.BrodImalat.WebService.Controllers
                     });
                 }
 
-        
-
-
-
+          
 
         }
-
 
 
 

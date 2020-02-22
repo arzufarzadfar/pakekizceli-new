@@ -15,7 +15,7 @@ namespace PAK.BrodImalat.WebService.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -377,18 +377,20 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.Property<string>("FicheNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Statu")
-                        .HasColumnType("int");
-
                     b.Property<int>("UpdateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("statusId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("statusId");
 
                     b.ToTable("orders");
                 });
@@ -448,7 +450,10 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<int>("StatuCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatuName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UpdateBy")
@@ -496,6 +501,24 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("PAK.BrodImalat.WebService.ModelsTokenUser.TokenResource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("Expiration")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TokenResource");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -552,29 +575,33 @@ namespace PAK.BrodImalat.WebService.Migrations
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.AltUnit", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.MainUnit", "MainUnit")
-                        .WithMany("altUnits")
+                        .WithMany()
                         .HasForeignKey("MainUnitId");
                 });
 
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.Order", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.Client", "Client")
-                        .WithMany("orders")
+                        .WithMany()
                         .HasForeignKey("ClientId");
+
+                    b.HasOne("PAK.BrodImalat.WebService.Models.Status", "status")
+                        .WithMany()
+                        .HasForeignKey("statusId");
                 });
 
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.OrderDetail", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.AltUnit", "AltUnit")
-                        .WithMany("orderDetails")
+                        .WithMany()
                         .HasForeignKey("AltUnitId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Item", "Item")
-                        .WithMany("orderDetails")
+                        .WithMany()
                         .HasForeignKey("ItemId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Order", "Order")
-                        .WithMany("orderDetails")
+                        .WithMany()
                         .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
