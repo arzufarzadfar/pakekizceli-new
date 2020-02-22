@@ -98,34 +98,40 @@ namespace PAK.BrodImalat.WebService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<AltUnit>> PostAltUnit(AltUnit alt)
+        public async Task<ActionResult<AltUnit>> PostAltUnit(AltUnit altUnit)
         {
-
-
-            _context.altUnits.Add(alt);
+            // _context.altUnits.Add(altUnit);
             _context.Database.OpenConnection();
 
             try
             {
-
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.altUnits ON");
-                _context.SaveChanges();
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.altUnits OFF");
+                //foreach (var item in _context.altUnits)
+                //{
+                if (!CheckAltUnit(altUnit))
+                {
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.altUnits ON");
+                    _context.altUnits.Add(altUnit);
+                    _context.SaveChanges();
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.altUnits OFF");
+                }
+                //}
 
             }
-
+            catch (Exception ex)
+            {
+                /*throw*/
+                string h = ex.Message;
+            }
             finally
             {
                 _context.Database.CloseConnection();
-
-
             }
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAltUnit", new { id = alt.Id }, alt);
+            return CreatedAtAction("GetAltUnit", new { id = altUnit.Id }, altUnit);
         }
 
-    
+
 
         // DELETE: api/AltUnits/5
         [HttpDelete("{id}")]

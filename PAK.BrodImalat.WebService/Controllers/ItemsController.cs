@@ -116,30 +116,39 @@ namespace PAK.BrodImalat.WebService.Controllers
         public async Task<ActionResult<Item>> PostItem(Item item)
         {
 
-            _context.items.Add(item);
+            //item.mainUnit = null;
             _context.Database.OpenConnection();
 
             try
             {
 
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.items ON");
-                _context.SaveChanges();
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.items OFF");
+                if (!CheckItem(item))
+                {
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.items ON");
+                    _context.items.Add(item);
+                    _context.SaveChanges();
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.items OFF");
+                }
 
+
+            }
+            catch (Exception ex)
+            {
+                /*throw*/
+                string h = ex.Message;
             }
 
             finally
             {
                 _context.Database.CloseConnection();
-
-
             }
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItems", new { id = item.Id }, item);
+            return CreatedAtAction("GetItem", new { id = item.Id }, item);
         }
 
-    
+
+
 
         // DELETE: api/Items/5
         [HttpDelete("{id}")]

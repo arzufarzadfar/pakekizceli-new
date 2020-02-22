@@ -106,16 +106,28 @@ namespace PAK.BrodImalat.WebService.Controllers
         public async Task<ActionResult<MainUnit>> PostMainUnit(MainUnit mainUnit)
         {
 
-            _context.mainUnits.Add(mainUnit);
             _context.Database.OpenConnection();
 
             try
             {
 
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.mainUnits ON");
-                _context.SaveChanges();
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.mainUnits OFF");
 
+                //foreach (var item in _context.mainUnits)
+                //{
+                if (!CheckMainUnit(mainUnit))
+                {
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.mainUnits ON");
+                    _context.mainUnits.Add(mainUnit);
+                    _context.SaveChanges();
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.mainUnits OFF");
+                }
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                /*throw*/
+                string h = ex.Message;
             }
 
             finally
@@ -125,11 +137,10 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             }
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetMainUnits", new { id = mainUnit.Id }, mainUnit);
+            return CreatedAtAction("GetMainUnit", new { id = mainUnit.Id }, mainUnit);
         }
 
-    
+
 
         // DELETE: api/MainUnits/5
         [HttpDelete("{id}")]

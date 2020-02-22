@@ -123,6 +123,10 @@ namespace PAK.BrodImalat.WebService.ModelsTokenUser
 
                 entity.Property(e => e.Email).HasMaxLength(256);
 
+                entity.Property(e => e.FirsName).HasColumnName("firsName");
+
+                entity.Property(e => e.LastName).HasColumnName("lastName");
+
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);

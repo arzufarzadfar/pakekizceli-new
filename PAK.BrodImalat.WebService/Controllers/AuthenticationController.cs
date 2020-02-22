@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -98,13 +99,6 @@ namespace PAK.BrodImalat.WebService.Controllers
                 }); ;
 
 
-              
-
-
-
-
-
-
 
 
             }
@@ -118,13 +112,43 @@ namespace PAK.BrodImalat.WebService.Controllers
                     });
                 }
 
-           
-
+        
 
 
 
 
         }
+
+
+
+
+        //[HttpPost]
+
+        //[AllowAnonymous]
+        //[Route("refreshToken")]
+
+        //public async Task<IActionResult> RefreshToken(string authenticationToken, string refreshToken)
+        //{
+        //    var principal = _context.AspNetUserTokens.(authenticationToken);
+        //    var username = principal.Identity.Name; //this is mapped to the Name claim by default
+
+        //    var user = _context.AspNetUserTokens.SingleOrDefault(u => u.UserId == username);
+        //    if (user == null || user.RefreshToken != refreshToken) return BadRequest();
+
+        //    var newJwtToken = _tokenService.GenerateAccessToken(principal.Claims);
+        //    var newRefreshToken = _tokenService.GenerateRefreshToken();
+
+        //    user.RefreshToken = newRefreshToken;
+        //    await _context.SaveChangesAsync();
+
+        //    return new ObjectResult(new
+        //    {
+        //        authenticationToken = newJwtToken,
+        //        refreshToken = newRefreshToken
+        //    });
+        //}
+
+
 
 
 
