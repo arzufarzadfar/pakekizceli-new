@@ -34,7 +34,6 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-
         [HttpPost]
             [Route("login")]
             [EnableCors("MyPolicy")]
@@ -48,6 +47,8 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
                     var userRoles = await userManager.GetRolesAsync(user);
+                    ////var userRoles1 = await userManager.getuser
+
 
                     var claims = new List<Claim>
 
@@ -85,8 +86,6 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-
-
                 return Ok(new
                 {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -97,10 +96,15 @@ namespace PAK.BrodImalat.WebService.Controllers
                     message = "Giriş Başarılı",
 
 
+                   
 
 
+            }); ;
 
-                }); ;
+              
+              
+
+
 
             }
             else
@@ -113,11 +117,12 @@ namespace PAK.BrodImalat.WebService.Controllers
                     });
                 }
 
-          
+
+         
 
         }
 
-
+      
 
         //[HttpPost]
 

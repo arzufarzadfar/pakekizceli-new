@@ -32,8 +32,9 @@ namespace PAK.BrodImalat.WebService.Data
         public DbSet<User> users { get; set; }
         public DbSet<Implamentaion> implamentaions { get; set; }
         public DbSet<PAK.BrodImalat.WebService.ModelsTokenUser.TokenResource> TokenResource { get; set; }
-    
-       //public DbSet<PAK.BrodImalat.WebService.ModelsTokenUser.AspNetUsersModels> AspNetUsersModels { get; set; }
+        public DbSet<TokenResource> tokenResources { get; set; }
+
+        //public DbSet<PAK.BrodImalat.WebService.ModelsTokenUser.AspNetUsersModels> AspNetUsersModels { get; set; }
 
         /////////////////////////////////////////
         ///

@@ -65,9 +65,137 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
+        [Route("getbeforedyeing")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getbeforedyeing()
+        {
+
+
+            var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 2)
+                .Include(p => p.Order)
+                .Include(p=>p.Item)
+
+
+                .ToList();
 
 
 
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(neworder1);
+        }
+
+
+
+
+
+        [Route("getafterdyeing")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getafterdyeing()
+        {
+
+
+            var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 3)
+                .Include(p => p.Order)
+                .Include(p => p.Item)
+
+
+                .ToList();
+
+
+
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(neworder1);
+        }
+
+
+
+
+        [Route("getbeforeclose")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getbeforeclose()
+        {
+
+
+            var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 4)
+                .Include(p => p.Order)
+                .Include(p => p.Item)
+
+
+                .ToList();
+
+
+
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(neworder1);
+        }
+
+
+
+        [Route("getafterclose")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getafterclose()
+        {
+
+
+            var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 5)
+                .Include(p => p.Order)
+                .Include(p => p.Item)
+
+
+                .ToList();
+
+
+
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(neworder1);
+        }
+
+
+
+
+
+        [Route("getaftersendpaket")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getaftersendpaket()
+        {
+
+
+            var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 6)
+                .Include(p => p.Order)
+                .Include(p => p.Item)
+
+
+                .ToList();
+
+
+
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(neworder1);
+        }
+        //////var neworder1 = _context.orders.Where(x => x.statusId == 2)
+
+
+        //////      .ToList();
 
 
         ////public async Task<ActionResult<OrderDetail>> GetOrderDetailGetOrders()

@@ -61,6 +61,54 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
+
+
+        [HttpGet("getinprogressorder")]
+        public async Task<ActionResult<Order>> Getinprogress(int id)
+        {
+
+
+            var neworder1 = _context.orders.Where(x => x.statusId == 2 || x.statusId == 3|| x.statusId == 4|| x.statusId == 5)
+                .Include(p => p.Client)
+               
+                .ToList();
+
+
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(neworder1);
+        }
+
+
+
+
+
+        [HttpGet("getcompletedorder")]
+        public async Task<ActionResult<Order>> Getcompletedorder(int id)
+        {
+
+
+            var neworder1 = _context.orders.Where(x => x.statusId == 6)
+                .Include(p => p.Client)
+                .ToList();
+
+
+            if (neworder1 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(neworder1);
+        }
+
+
+
+       
+
+
         // PUT: api/Orders/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
