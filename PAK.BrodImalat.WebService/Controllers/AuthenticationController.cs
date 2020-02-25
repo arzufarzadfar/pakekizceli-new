@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using PAK.BrodImalat.WebService.Data;
 using PAK.BrodImalat.WebService.Models;
 using PAK.BrodImalat.WebService.ModelsTokenUser;
+using RequestApiService.Models;
 
 namespace PAK.BrodImalat.WebService.Controllers
 {
@@ -23,13 +24,35 @@ namespace PAK.BrodImalat.WebService.Controllers
     {
 
            private UserManager<ApplicationUser> userManager;
-           private readonly PakEkizcelibrode2Context _context;
+         
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, PakEkizcelibrode2Context _context)
+        public AuthenticationController(UserManager<ApplicationUser> userManager)
             {
                 this.userManager = userManager;
             }
 
+        [Route("register")]
+        [HttpPost]
+        public async Task<ActionResult> InsertUser([FromBody] RegisterViewModel model)
+        {
+            ApplicationUser user1 = new ApplicationUser()
+            {
+                SecurityStamp = Guid.NewGuid().ToString(),
+                Email = model.Email,
+                UserName = model.Email,
+                firsName = model.firstName,
+                lastName = model.lastName
+
+
+            };
+
+            var result = await userManager.CreateAsync(user1, model.Password);
+            if (result.Succeeded)
+            {
+                //await userManager.AddToRoleAsync(user, "Customer");
+            }
+            return Ok( user1);
+        }
 
 
         [HttpPost]
@@ -85,6 +108,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
+
                 return Ok(new
                 {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -92,9 +116,10 @@ namespace PAK.BrodImalat.WebService.Controllers
 
                     firstName = user.firsName,
                     lastName = user.lastName,
-                    message = "Giriş Başarılı",
+                    Id = user.Id,
 
-            }); ;
+
+            }); 
 
           
             }
@@ -108,8 +133,13 @@ namespace PAK.BrodImalat.WebService.Controllers
                     });
                 }
 
-            
+
+
+
+
         }
+
+
 
 
         [HttpGet("gettoken")]

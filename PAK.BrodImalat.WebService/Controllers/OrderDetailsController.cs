@@ -192,29 +192,22 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             return Ok(neworder1);
         }
-        //////var neworder1 = _context.orders.Where(x => x.statusId == 2)
 
 
-        //////      .ToList();
+        [HttpGet("byOrder/{id}")]
+        public List<OrderDetail> GetOrderDetailByOrder(int id)
+        {
+            var orderDetail = _context.orderDetails
 
+                .Where(p => p.OrderId == id);
 
-        ////public async Task<ActionResult<OrderDetail>> GetOrderDetailGetOrders()
-        ////{
-        ////    var orderDetail = await _context.orderDetails
-        ////        .Include(p => p.Order)
-        ////        .Include(p => p.Item)
-        ////        .Include(p => p.Order.Client)
-        ////       .Include(p => p.AltUnit)
+            if (orderDetail == null)
+            {
+                return null;
+            }
 
-        ////        .ToListAsync();
-
-
-
-        ////    return Ok(orderDetail);
-        ////}
-
-
-
+            return orderDetail.ToList();
+        }
 
 
 

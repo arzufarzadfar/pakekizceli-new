@@ -30,12 +30,16 @@ namespace PAK.BrodImalat.WebService.Models
         public virtual DbSet<Lg001Unitsetf> Lg001Unitsetf { get; set; }
         public virtual DbSet<Lg001Unitset> Lg001Unitsetl { get; set; }
 
+        public virtual DbSet<Lg00101Stfiche> Lg00101Stfiche { get; set; }
+        public virtual DbSet<Lg00101Stline> Lg00101Stline { get; set; }
+        public virtual DbSet<Lg00101Clfline> Lg00101Clfline { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("Server=.;Database=GO;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=GO3;Trusted_Connection=True;");
             }
         }
 
@@ -3072,6 +3076,1575 @@ namespace PAK.BrodImalat.WebService.Models
                 entity.Property(e => e.Wincolor).HasColumnName("WINCOLOR");
             });
 
+            modelBuilder.Entity<Lg00101Stfiche>(entity =>
+            {
+                entity.HasKey(e => e.Logicalref)
+                    .HasName("I001_01_STFICHE_I1");
+
+                entity.ToTable("LG_001_01_STFICHE");
+
+                entity.HasIndex(e => e.Accficheref)
+                    .HasName("I001_01_STFICHE_I7");
+
+                entity.HasIndex(e => e.Globalid)
+                    .HasName("I001_01_STFICHE_I20");
+
+                entity.HasIndex(e => e.Guid)
+                    .HasName("I001_01_STFICHE_I21");
+
+                entity.HasIndex(e => e.Mainstfcref)
+                    .HasName("I001_01_STFICHE_I16");
+
+                entity.HasIndex(e => e.Prodorderref)
+                    .HasName("I001_01_STFICHE_I9");
+
+                entity.HasIndex(e => new { e.Destpolnref, e.Trcode })
+                    .HasName("I001_01_STFICHE_I11");
+
+                entity.HasIndex(e => new { e.Grpcode, e.Docode })
+                    .HasName("I001_01_STFICHE_I17");
+
+                entity.HasIndex(e => new { e.Invoiceref, e.Fichecnt })
+                    .HasName("I001_01_STFICHE_I4");
+
+                entity.HasIndex(e => new { e.Orglogicref, e.Siteid })
+                    .HasName("I001_01_STFICHE_I12");
+
+                entity.HasIndex(e => new { e.Sourcepolnref, e.Trcode })
+                    .HasName("I001_01_STFICHE_I10");
+
+                entity.HasIndex(e => new { e.Status, e.Dispstatus })
+                    .HasName("I001_01_STFICHE_I18");
+
+                entity.HasIndex(e => new { e.Trcode, e.Ficheno })
+                    .HasName("I001_01_STFICHE_I5")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.Grpcode, e.Ficheno, e.Trcode })
+                    .HasName("I001_01_STFICHE_I19");
+
+                entity.HasIndex(e => new { e.Grpcode, e.Trcode, e.Ficheno })
+                    .HasName("I001_01_STFICHE_I2")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.Orglogicref, e.Logicalref, e.Siteid })
+                    .HasName("I001_01_STFICHE_I15")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.Salesmanref, e.Date, e.Ftime })
+                    .HasName("I001_01_STFICHE_I8");
+
+                entity.HasIndex(e => new { e.Sourcepolnref, e.Prodstat, e.Trcode })
+                    .HasName("I001_01_STFICHE_I14");
+
+                entity.HasIndex(e => new { e.Clientref, e.Trcode, e.Date, e.Ftime })
+                    .HasName("I001_01_STFICHE_I22");
+
+                entity.HasIndex(e => new { e.Date, e.Ftime, e.Iocode, e.Trcode })
+                    .HasName("I001_01_STFICHE_I6");
+
+                entity.HasIndex(e => new { e.Grpcode, e.Date, e.Ftime, e.Iocode, e.Trcode })
+                    .HasName("I001_01_STFICHE_I3");
+
+                entity.HasIndex(e => new { e.Prodorderref, e.Grpcode, e.Date, e.Ftime, e.Iocode, e.Trcode })
+                    .HasName("I001_01_STFICHE_I13");
+
+                entity.Property(e => e.Logicalref).HasColumnName("LOGICALREF");
+
+                entity.Property(e => e.Accepteinvpublic).HasColumnName("ACCEPTEINVPUBLIC");
+
+                entity.Property(e => e.Accficheref).HasColumnName("ACCFICHEREF");
+
+                entity.Property(e => e.Accounted).HasColumnName("ACCOUNTED");
+
+                entity.Property(e => e.Accountref).HasColumnName("ACCOUNTREF");
+
+                entity.Property(e => e.Adddiscounts).HasColumnName("ADDDISCOUNTS");
+
+                entity.Property(e => e.Addexpenses).HasColumnName("ADDEXPENSES");
+
+                entity.Property(e => e.Addtaxcalc).HasColumnName("ADDTAXCALC");
+
+                entity.Property(e => e.Affectcollatrl).HasColumnName("AFFECTCOLLATRL");
+
+                entity.Property(e => e.Affectrisk).HasColumnName("AFFECTRISK");
+
+                entity.Property(e => e.Approve).HasColumnName("APPROVE");
+
+                entity.Property(e => e.Approvedate)
+                    .HasColumnName("APPROVEDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Ataxexceptcode)
+                    .HasColumnName("ATAXEXCEPTCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ataxexceptreason)
+                    .HasColumnName("ATAXEXCEPTREASON")
+                    .HasMaxLength(201)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Billed).HasColumnName("BILLED");
+
+                entity.Property(e => e.Branch).HasColumnName("BRANCH");
+
+                entity.Property(e => e.Campaigncode)
+                    .HasColumnName("CAMPAIGNCODE")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Canceldate)
+                    .HasColumnName("CANCELDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Cancelexp)
+                    .HasColumnName("CANCELEXP")
+                    .HasMaxLength(251)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Cancelled).HasColumnName("CANCELLED");
+
+                entity.Property(e => e.Cancelledacc).HasColumnName("CANCELLEDACC");
+
+                entity.Property(e => e.Cantcrededuct).HasColumnName("CANTCREDEDUCT");
+
+                entity.Property(e => e.CapiblockCreadeddate)
+                    .HasColumnName("CAPIBLOCK_CREADEDDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CapiblockCreatedby).HasColumnName("CAPIBLOCK_CREATEDBY");
+
+                entity.Property(e => e.CapiblockCreatedhour).HasColumnName("CAPIBLOCK_CREATEDHOUR");
+
+                entity.Property(e => e.CapiblockCreatedmin).HasColumnName("CAPIBLOCK_CREATEDMIN");
+
+                entity.Property(e => e.CapiblockCreatedsec).HasColumnName("CAPIBLOCK_CREATEDSEC");
+
+                entity.Property(e => e.CapiblockModifiedby).HasColumnName("CAPIBLOCK_MODIFIEDBY");
+
+                entity.Property(e => e.CapiblockModifieddate)
+                    .HasColumnName("CAPIBLOCK_MODIFIEDDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CapiblockModifiedhour).HasColumnName("CAPIBLOCK_MODIFIEDHOUR");
+
+                entity.Property(e => e.CapiblockModifiedmin).HasColumnName("CAPIBLOCK_MODIFIEDMIN");
+
+                entity.Property(e => e.CapiblockModifiedsec).HasColumnName("CAPIBLOCK_MODIFIEDSEC");
+
+                entity.Property(e => e.Centerref).HasColumnName("CENTERREF");
+
+                entity.Property(e => e.Clientref).HasColumnName("CLIENTREF");
+
+                entity.Property(e => e.Compbranch).HasColumnName("COMPBRANCH");
+
+                entity.Property(e => e.Compdepartment).HasColumnName("COMPDEPARTMENT");
+
+                entity.Property(e => e.Compfactory).HasColumnName("COMPFACTORY");
+
+                entity.Property(e => e.Compinvref).HasColumnName("COMPINVREF");
+
+                entity.Property(e => e.Compstfcref).HasColumnName("COMPSTFCREF");
+
+                entity.Property(e => e.Controlinfo).HasColumnName("CONTROLINFO");
+
+                entity.Property(e => e.Createwhere).HasColumnName("CREATEWHERE");
+
+                entity.Property(e => e.Cyphcode)
+                    .HasColumnName("CYPHCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("DATE_")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Deductionpart1).HasColumnName("DEDUCTIONPART1");
+
+                entity.Property(e => e.Deductionpart2).HasColumnName("DEDUCTIONPART2");
+
+                entity.Property(e => e.Deliverycode)
+                    .HasColumnName("DELIVERYCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Department).HasColumnName("DEPARTMENT");
+
+                entity.Property(e => e.Destcostgrp).HasColumnName("DESTCOSTGRP");
+
+                entity.Property(e => e.Destindex).HasColumnName("DESTINDEX");
+
+                entity.Property(e => e.Destpolnref).HasColumnName("DESTPOLNREF");
+
+                entity.Property(e => e.Deststatus).HasColumnName("DESTSTATUS");
+
+                entity.Property(e => e.Desttype).HasColumnName("DESTTYPE");
+
+                entity.Property(e => e.Destwsref).HasColumnName("DESTWSREF");
+
+                entity.Property(e => e.Devir).HasColumnName("DEVIR");
+
+                entity.Property(e => e.Dispstatus).HasColumnName("DISPSTATUS");
+
+                entity.Property(e => e.Distorderref).HasColumnName("DISTORDERREF");
+
+                entity.Property(e => e.Dlvclient).HasColumnName("DLVCLIENT");
+
+                entity.Property(e => e.Docdate)
+                    .HasColumnName("DOCDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Docode)
+                    .HasColumnName("DOCODE")
+                    .HasMaxLength(33)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Doctime).HasColumnName("DOCTIME");
+
+                entity.Property(e => e.Doctrackingnr)
+                    .HasColumnName("DOCTRACKINGNR")
+                    .HasMaxLength(21)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Edespatch).HasColumnName("EDESPATCH");
+
+                entity.Property(e => e.Edespstatus).HasColumnName("EDESPSTATUS");
+
+                entity.Property(e => e.Einvoice).HasColumnName("EINVOICE");
+
+                entity.Property(e => e.Einvoicetyp).HasColumnName("EINVOICETYP");
+
+                entity.Property(e => e.Entrustdevir).HasColumnName("ENTRUSTDEVIR");
+
+                entity.Property(e => e.Eximfctype).HasColumnName("EXIMFCTYPE");
+
+                entity.Property(e => e.Eximwhfcref).HasColumnName("EXIMWHFCREF");
+
+                entity.Property(e => e.Extenref).HasColumnName("EXTENREF");
+
+                entity.Property(e => e.Factorynr).HasColumnName("FACTORYNR");
+
+                entity.Property(e => e.Fichecnt).HasColumnName("FICHECNT");
+
+                entity.Property(e => e.Ficheno)
+                    .HasColumnName("FICHENO")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Frgtypcod)
+                    .HasColumnName("FRGTYPCOD")
+                    .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Fromexim).HasColumnName("FROMEXIM");
+
+                entity.Property(e => e.Fromordwithpay).HasColumnName("FROMORDWITHPAY");
+
+                entity.Property(e => e.Fromtransfer).HasColumnName("FROMTRANSFER");
+
+                entity.Property(e => e.Ftime).HasColumnName("FTIME");
+
+                entity.Property(e => e.Genexctyp).HasColumnName("GENEXCTYP");
+
+                entity.Property(e => e.Genexp1)
+                    .HasColumnName("GENEXP1")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Genexp2)
+                    .HasColumnName("GENEXP2")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Genexp3)
+                    .HasColumnName("GENEXP3")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Genexp4)
+                    .HasColumnName("GENEXP4")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Genexp5)
+                    .HasColumnName("GENEXP5")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Genexp6)
+                    .HasColumnName("GENEXP6")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Globalid)
+                    .HasColumnName("GLOBALID")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Grosstotal).HasColumnName("GROSSTOTAL");
+
+                entity.Property(e => e.Grpcode).HasColumnName("GRPCODE");
+
+                entity.Property(e => e.Grpfirmtrans).HasColumnName("GRPFIRMTRANS");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasMaxLength(37)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Inuse).HasColumnName("INUSE");
+
+                entity.Property(e => e.Invkind).HasColumnName("INVKIND");
+
+                entity.Property(e => e.Invno)
+                    .HasColumnName("INVNO")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Invoiceref).HasColumnName("INVOICEREF");
+
+                entity.Property(e => e.Iocode).HasColumnName("IOCODE");
+
+                entity.Property(e => e.Lineexctyp).HasColumnName("LINEEXCTYP");
+
+                entity.Property(e => e.Mainstfcref).HasColumnName("MAINSTFCREF");
+
+                entity.Property(e => e.Nettotal).HasColumnName("NETTOTAL");
+
+                entity.Property(e => e.Nocalculate).HasColumnName("NOCALCULATE");
+
+                entity.Property(e => e.Offerref).HasColumnName("OFFERREF");
+
+                entity.Property(e => e.Orglogicref).HasColumnName("ORGLOGICREF");
+
+                entity.Property(e => e.Orglogoid)
+                    .HasColumnName("ORGLOGOID")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Paydefref).HasColumnName("PAYDEFREF");
+
+                entity.Property(e => e.Porderficheno)
+                    .HasColumnName("PORDERFICHENO")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Prdordslplnreserve).HasColumnName("PRDORDSLPLNRESERVE");
+
+                entity.Property(e => e.Printcnt).HasColumnName("PRINTCNT");
+
+                entity.Property(e => e.Printdate)
+                    .HasColumnName("PRINTDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Prodorderref).HasColumnName("PRODORDERREF");
+
+                entity.Property(e => e.Prodordertyp).HasColumnName("PRODORDERTYP");
+
+                entity.Property(e => e.Prodstat).HasColumnName("PRODSTAT");
+
+                entity.Property(e => e.Profileid).HasColumnName("PROFILEID");
+
+                entity.Property(e => e.Projectref).HasColumnName("PROJECTREF");
+
+                entity.Property(e => e.Publicbnaccref).HasColumnName("PUBLICBNACCREF");
+
+                entity.Property(e => e.Qprodfcref).HasColumnName("QPRODFCREF");
+
+                entity.Property(e => e.Qprodfctyp).HasColumnName("QPRODFCTYP");
+
+                entity.Property(e => e.Rechash)
+                    .HasColumnName("RECHASH")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Recstatus).HasColumnName("RECSTATUS");
+
+                entity.Property(e => e.Recvref).HasColumnName("RECVREF");
+
+                entity.Property(e => e.Reltransfcref).HasColumnName("RELTRANSFCREF");
+
+                entity.Property(e => e.Reportnet).HasColumnName("REPORTNET");
+
+                entity.Property(e => e.Reportrate).HasColumnName("REPORTRATE");
+
+                entity.Property(e => e.Salesmanref).HasColumnName("SALESMANREF");
+
+                entity.Property(e => e.Sendcnt).HasColumnName("SENDCNT");
+
+                entity.Property(e => e.Shipdate)
+                    .HasColumnName("SHIPDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Shipinforef).HasColumnName("SHIPINFOREF");
+
+                entity.Property(e => e.Shiptime).HasColumnName("SHIPTIME");
+
+                entity.Property(e => e.Shpagncod)
+                    .HasColumnName("SHPAGNCOD")
+                    .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Shptypcod)
+                    .HasColumnName("SHPTYPCOD")
+                    .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Siteid).HasColumnName("SITEID");
+
+                entity.Property(e => e.Sourcecostgrp).HasColumnName("SOURCECOSTGRP");
+
+                entity.Property(e => e.Sourceindex).HasColumnName("SOURCEINDEX");
+
+                entity.Property(e => e.Sourcepolnref).HasColumnName("SOURCEPOLNREF");
+
+                entity.Property(e => e.Sourcetype).HasColumnName("SOURCETYPE");
+
+                entity.Property(e => e.Sourcewsref).HasColumnName("SOURCEWSREF");
+
+                entity.Property(e => e.Specode)
+                    .HasColumnName("SPECODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status).HasColumnName("STATUS");
+
+                entity.Property(e => e.Taxfreechx).HasColumnName("TAXFREECHX");
+
+                entity.Property(e => e.Textinc).HasColumnName("TEXTINC");
+
+                entity.Property(e => e.Totaladdtax).HasColumnName("TOTALADDTAX");
+
+                entity.Property(e => e.Totaldepozito).HasColumnName("TOTALDEPOZITO");
+
+                entity.Property(e => e.Totaldiscounted).HasColumnName("TOTALDISCOUNTED");
+
+                entity.Property(e => e.Totaldiscounts).HasColumnName("TOTALDISCOUNTS");
+
+                entity.Property(e => e.Totalexaddtax).HasColumnName("TOTALEXADDTAX");
+
+                entity.Property(e => e.Totalexpenses).HasColumnName("TOTALEXPENSES");
+
+                entity.Property(e => e.Totalpromotions).HasColumnName("TOTALPROMOTIONS");
+
+                entity.Property(e => e.Totalservices).HasColumnName("TOTALSERVICES");
+
+                entity.Property(e => e.Totalvat).HasColumnName("TOTALVAT");
+
+                entity.Property(e => e.Tracknr)
+                    .HasColumnName("TRACKNR")
+                    .HasMaxLength(65)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tradinggrp)
+                    .HasColumnName("TRADINGGRP")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Trcode).HasColumnName("TRCODE");
+
+                entity.Property(e => e.Trcurr).HasColumnName("TRCURR");
+
+                entity.Property(e => e.Trnet).HasColumnName("TRNET");
+
+                entity.Property(e => e.Trrate).HasColumnName("TRRATE");
+
+                entity.Property(e => e.Ugirtrackingno)
+                    .HasColumnName("UGIRTRACKINGNO")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Undoexp)
+                    .HasColumnName("UNDOEXP")
+                    .HasMaxLength(251)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Updcurr).HasColumnName("UPDCURR");
+
+                entity.Property(e => e.Updtrcurr).HasColumnName("UPDTRCURR");
+
+                entity.Property(e => e.Vaaccref).HasColumnName("VAACCREF");
+
+                entity.Property(e => e.Vacenterref).HasColumnName("VACENTERREF");
+
+                entity.Property(e => e.Vatexceptcode)
+                    .HasColumnName("VATEXCEPTCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Vatexceptreason)
+                    .HasColumnName("VATEXCEPTREASON")
+                    .HasMaxLength(201)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Wflowcrdref).HasColumnName("WFLOWCRDREF");
+
+                entity.Property(e => e.Wfstatus).HasColumnName("WFSTATUS");
+            });
+            modelBuilder.Entity<Lg00101Stline>(entity =>
+            {
+                entity.HasKey(e => e.Logicalref)
+                    .HasName("I001_01_STLINE_I1");
+
+                entity.ToTable("LG_001_01_STLINE");
+
+                entity.HasIndex(e => e.Globalid)
+                    .HasName("I001_01_STLINE_I29");
+
+                entity.HasIndex(e => e.Guid)
+                    .HasName("I001_01_STLINE_I30");
+
+                entity.HasIndex(e => e.Ordficheref)
+                    .HasName("I001_01_STLINE_I25");
+
+                entity.HasIndex(e => e.Ordtransref)
+                    .HasName("I001_01_STLINE_I3");
+
+                entity.HasIndex(e => e.Prclistref)
+                    .HasName("I001_01_STLINE_I21");
+
+                entity.HasIndex(e => e.Sourcelink)
+                    .HasName("I001_01_STLINE_I7");
+
+                entity.HasIndex(e => e.Uomref)
+                    .HasName("I001_01_STLINE_I10");
+
+                entity.HasIndex(e => new { e.Detline, e.Invoiceref })
+                    .HasName("I001_01_STLINE_I26");
+
+                entity.HasIndex(e => new { e.Invoiceref, e.Invoicelnno })
+                    .HasName("I001_01_STLINE_I5");
+
+                entity.HasIndex(e => new { e.Orglogicref, e.Siteid })
+                    .HasName("I001_01_STLINE_I17");
+
+                entity.HasIndex(e => new { e.Stficheref, e.Stfichelnno })
+                    .HasName("I001_01_STLINE_I4");
+
+                entity.HasIndex(e => new { e.Variantref, e.Trcode })
+                    .HasName("I001_01_STLINE_I24");
+
+                entity.HasIndex(e => new { e.Clientref, e.Date, e.Ftime })
+                    .HasName("I001_01_STLINE_I6");
+
+                entity.HasIndex(e => new { e.Faregref, e.Date, e.Logicalref })
+                    .HasName("I001_01_STLINE_I18")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.Stficheref, e.Linetype, e.Faregref })
+                    .HasName("I001_01_STLINE_I28");
+
+                entity.HasIndex(e => new { e.Date, e.Ftime, e.Trcode, e.Iocode })
+                    .HasName("I001_01_STLINE_I19");
+
+                entity.HasIndex(e => new { e.Linetype, e.Stficheref, e.Prevlineref, e.Prevlineno })
+                    .HasName("I001_01_STLINE_I11");
+
+                entity.HasIndex(e => new { e.Clientref, e.Stockref, e.Variantref, e.Date, e.Ftime })
+                    .HasName("I001_01_STLINE_I8");
+
+                entity.HasIndex(e => new { e.Salesmanref, e.Stockref, e.Variantref, e.Date, e.Ftime })
+                    .HasName("I001_01_STLINE_I9");
+
+                entity.HasIndex(e => new { e.Amount, e.Uinfo1, e.Uinfo2, e.Detline, e.Cancelled, e.Offtransref, e.Trcode, e.Logicalref })
+                    .HasName("I001_01_STLINE_I99")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.Stockref, e.Variantref, e.Date, e.Ftime, e.Iocode, e.Sourceindex, e.Trcode, e.Linetype })
+                    .HasName("I001_01_STLINE_I2");
+
+                entity.HasIndex(e => new { e.Stficheref, e.Invoiceref, e.Variantref, e.Stockref, e.Sourceindex, e.Cancelled, e.Linetype, e.Trcode, e.Date })
+                    .HasName("I001_01_STLINE_I98");
+
+                entity.Property(e => e.Logicalref).HasColumnName("LOGICALREF");
+
+                entity.Property(e => e.Abvatamount).HasColumnName("ABVATAMOUNT");
+
+                entity.Property(e => e.Abvatstatus).HasColumnName("ABVATSTATUS");
+
+                entity.Property(e => e.Accountref).HasColumnName("ACCOUNTREF");
+
+                entity.Property(e => e.Addtaxaccref).HasColumnName("ADDTAXACCREF");
+
+                entity.Property(e => e.Addtaxamntisupd).HasColumnName("ADDTAXAMNTISUPD");
+
+                entity.Property(e => e.Addtaxamount).HasColumnName("ADDTAXAMOUNT");
+
+                entity.Property(e => e.Addtaxcenterref).HasColumnName("ADDTAXCENTERREF");
+
+                entity.Property(e => e.Addtaxconvfact).HasColumnName("ADDTAXCONVFACT");
+
+                entity.Property(e => e.Addtaxcosaccref).HasColumnName("ADDTAXCOSACCREF");
+
+                entity.Property(e => e.Addtaxcoscntref).HasColumnName("ADDTAXCOSCNTREF");
+
+                entity.Property(e => e.Addtaxdiscamount).HasColumnName("ADDTAXDISCAMOUNT");
+
+                entity.Property(e => e.Addtaxprcost).HasColumnName("ADDTAXPRCOST");
+
+                entity.Property(e => e.Addtaxprcostcurr).HasColumnName("ADDTAXPRCOSTCURR");
+
+                entity.Property(e => e.Addtaxrate).HasColumnName("ADDTAXRATE");
+
+                entity.Property(e => e.Addtaxretcost).HasColumnName("ADDTAXRETCOST");
+
+                entity.Property(e => e.Addtaxretcostcurr).HasColumnName("ADDTAXRETCOSTCURR");
+
+                entity.Property(e => e.Addtaxvatmatrah).HasColumnName("ADDTAXVATMATRAH");
+
+                entity.Property(e => e.Adjprcostufrs).HasColumnName("ADJPRCOSTUFRS");
+
+                entity.Property(e => e.Adjprcrcostufrs).HasColumnName("ADJPRCRCOSTUFRS");
+
+                entity.Property(e => e.Adjpriceufrs).HasColumnName("ADJPRICEUFRS");
+
+                entity.Property(e => e.Adjreppriceufrs).HasColumnName("ADJREPPRICEUFRS");
+
+                entity.Property(e => e.Affectcollatrl).HasColumnName("AFFECTCOLLATRL");
+
+                entity.Property(e => e.Affectrisk).HasColumnName("AFFECTRISK");
+
+                entity.Property(e => e.Altpromflag).HasColumnName("ALTPROMFLAG");
+
+                entity.Property(e => e.Amount).HasColumnName("AMOUNT");
+
+                entity.Property(e => e.Ataxexceptcode)
+                    .HasColumnName("ATAXEXCEPTCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ataxexceptreason)
+                    .HasColumnName("ATAXEXCEPTREASON")
+                    .HasMaxLength(201)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Billed).HasColumnName("BILLED");
+
+                entity.Property(e => e.Billeditem).HasColumnName("BILLEDITEM");
+
+                entity.Property(e => e.Calctype).HasColumnName("CALCTYPE");
+
+                entity.Property(e => e.Campaignrefs1).HasColumnName("CAMPAIGNREFS1");
+
+                entity.Property(e => e.Campaignrefs2).HasColumnName("CAMPAIGNREFS2");
+
+                entity.Property(e => e.Campaignrefs3).HasColumnName("CAMPAIGNREFS3");
+
+                entity.Property(e => e.Campaignrefs4).HasColumnName("CAMPAIGNREFS4");
+
+                entity.Property(e => e.Campaignrefs5).HasColumnName("CAMPAIGNREFS5");
+
+                entity.Property(e => e.Camppaydefref).HasColumnName("CAMPPAYDEFREF");
+
+                entity.Property(e => e.Camppoint).HasColumnName("CAMPPOINT");
+
+                entity.Property(e => e.Camppoints1).HasColumnName("CAMPPOINTS1");
+
+                entity.Property(e => e.Camppoints2).HasColumnName("CAMPPOINTS2");
+
+                entity.Property(e => e.Camppoints3).HasColumnName("CAMPPOINTS3");
+
+                entity.Property(e => e.Camppoints4).HasColumnName("CAMPPOINTS4");
+
+                entity.Property(e => e.Cancelled).HasColumnName("CANCELLED");
+
+                entity.Property(e => e.Candeduct).HasColumnName("CANDEDUCT");
+
+                entity.Property(e => e.Centerref).HasColumnName("CENTERREF");
+
+                entity.Property(e => e.Clientref).HasColumnName("CLIENTREF");
+
+                entity.Property(e => e.Cmpglineref).HasColumnName("CMPGLINEREF");
+
+                entity.Property(e => e.Cmpglinerefs1).HasColumnName("CMPGLINEREFS1");
+
+                entity.Property(e => e.Cmpglinerefs2).HasColumnName("CMPGLINEREFS2");
+
+                entity.Property(e => e.Cmpglinerefs3).HasColumnName("CMPGLINEREFS3");
+
+                entity.Property(e => e.Cmpglinerefs4).HasColumnName("CMPGLINEREFS4");
+
+                entity.Property(e => e.Conditionref).HasColumnName("CONDITIONREF");
+
+                entity.Property(e => e.Cosaccrefufrs).HasColumnName("COSACCREFUFRS");
+
+                entity.Property(e => e.Coscntrefufrs).HasColumnName("COSCNTREFUFRS");
+
+                entity.Property(e => e.Costdiffaccref).HasColumnName("COSTDIFFACCREF");
+
+                entity.Property(e => e.Costdiffcenref).HasColumnName("COSTDIFFCENREF");
+
+                entity.Property(e => e.Costdistprice).HasColumnName("COSTDISTPRICE");
+
+                entity.Property(e => e.Costdistpriceufrs).HasColumnName("COSTDISTPRICEUFRS");
+
+                entity.Property(e => e.Costdistrepprice).HasColumnName("COSTDISTREPPRICE");
+
+                entity.Property(e => e.Costdistreppriceufrs).HasColumnName("COSTDISTREPPRICEUFRS");
+
+                entity.Property(e => e.Costofsaleaccref).HasColumnName("COSTOFSALEACCREF");
+
+                entity.Property(e => e.Costofsalecntref).HasColumnName("COSTOFSALECNTREF");
+
+                entity.Property(e => e.Costrate).HasColumnName("COSTRATE");
+
+                entity.Property(e => e.Cpacode)
+                    .HasColumnName("CPACODE")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Cpstflag).HasColumnName("CPSTFLAG");
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("DATE_")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Decprdiff).HasColumnName("DECPRDIFF");
+
+                entity.Property(e => e.Deductcode)
+                    .HasColumnName("DEDUCTCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Deductionpart1).HasColumnName("DEDUCTIONPART1");
+
+                entity.Property(e => e.Deductionpart2).HasColumnName("DEDUCTIONPART2");
+
+                entity.Property(e => e.Delvrycode)
+                    .HasColumnName("DELVRYCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Dempeggedamnt).HasColumnName("DEMPEGGEDAMNT");
+
+                entity.Property(e => e.Destcostgrp).HasColumnName("DESTCOSTGRP");
+
+                entity.Property(e => e.Destindex).HasColumnName("DESTINDEX");
+
+                entity.Property(e => e.Destpolnref).HasColumnName("DESTPOLNREF");
+
+                entity.Property(e => e.Deststatus).HasColumnName("DESTSTATUS");
+
+                entity.Property(e => e.Desttype).HasColumnName("DESTTYPE");
+
+                entity.Property(e => e.Destwsref).HasColumnName("DESTWSREF");
+
+                entity.Property(e => e.Detline).HasColumnName("DETLINE");
+
+                entity.Property(e => e.Diffprcost).HasColumnName("DIFFPRCOST");
+
+                entity.Property(e => e.Diffprcostufrs).HasColumnName("DIFFPRCOSTUFRS");
+
+                entity.Property(e => e.Diffprcrcost).HasColumnName("DIFFPRCRCOST");
+
+                entity.Property(e => e.Diffprcrcostufrs).HasColumnName("DIFFPRCRCOSTUFRS");
+
+                entity.Property(e => e.Diffprice).HasColumnName("DIFFPRICE");
+
+                entity.Property(e => e.Diffpriceufrs).HasColumnName("DIFFPRICEUFRS");
+
+                entity.Property(e => e.Diffrepprice).HasColumnName("DIFFREPPRICE");
+
+                entity.Property(e => e.Diffreppriceufrs).HasColumnName("DIFFREPPRICEUFRS");
+
+                entity.Property(e => e.Discper).HasColumnName("DISCPER");
+
+                entity.Property(e => e.Distaddexp).HasColumnName("DISTADDEXP");
+
+                entity.Property(e => e.Distcoef).HasColumnName("DISTCOEF");
+
+                entity.Property(e => e.Distcost).HasColumnName("DISTCOST");
+
+                entity.Property(e => e.Distdisc).HasColumnName("DISTDISC");
+
+                entity.Property(e => e.Distexp).HasColumnName("DISTEXP");
+
+                entity.Property(e => e.Distorderref).HasColumnName("DISTORDERREF");
+
+                entity.Property(e => e.Distordlineref).HasColumnName("DISTORDLINEREF");
+
+                entity.Property(e => e.Distprom).HasColumnName("DISTPROM");
+
+                entity.Property(e => e.Doreserve).HasColumnName("DORESERVE");
+
+                entity.Property(e => e.Dref).HasColumnName("DREF");
+
+                entity.Property(e => e.Eidistflnnr).HasColumnName("EIDISTFLNNR");
+
+                entity.Property(e => e.Eisrvdsttyp).HasColumnName("EISRVDSTTYP");
+
+                entity.Property(e => e.Exaddtaxamnt).HasColumnName("EXADDTAXAMNT");
+
+                entity.Property(e => e.Exaddtaxaref).HasColumnName("EXADDTAXAREF");
+
+                entity.Property(e => e.Exaddtaxconvf).HasColumnName("EXADDTAXCONVF");
+
+                entity.Property(e => e.Exaddtaxcref).HasColumnName("EXADDTAXCREF");
+
+                entity.Property(e => e.Exaddtaxrate).HasColumnName("EXADDTAXRATE");
+
+                entity.Property(e => e.Eximfctype).HasColumnName("EXIMFCTYPE");
+
+                entity.Property(e => e.Eximficheno)
+                    .HasColumnName("EXIMFICHENO")
+                    .HasMaxLength(31)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Eximfileref).HasColumnName("EXIMFILEREF");
+
+                entity.Property(e => e.Eximprocnr).HasColumnName("EXIMPROCNR");
+
+                entity.Property(e => e.Eximtype).HasColumnName("EXIMTYPE");
+
+                entity.Property(e => e.Eximwhfcref).HasColumnName("EXIMWHFCREF");
+
+                entity.Property(e => e.Eximwhlnref).HasColumnName("EXIMWHLNREF");
+
+                entity.Property(e => e.Faattrib).HasColumnName("FAATTRIB");
+
+                entity.Property(e => e.Factorynr).HasColumnName("FACTORYNR");
+
+                entity.Property(e => e.Fadaccref).HasColumnName("FADACCREF");
+
+                entity.Property(e => e.Fadcenterref).HasColumnName("FADCENTERREF");
+
+                entity.Property(e => e.Falinktype).HasColumnName("FALINKTYPE");
+
+                entity.Property(e => e.Falossaccref).HasColumnName("FALOSSACCREF");
+
+                entity.Property(e => e.Falosscentref).HasColumnName("FALOSSCENTREF");
+
+                entity.Property(e => e.Faplaccref).HasColumnName("FAPLACCREF");
+
+                entity.Property(e => e.Faplcenterref).HasColumnName("FAPLCENTERREF");
+
+                entity.Property(e => e.Faprofitaccref).HasColumnName("FAPROFITACCREF");
+
+                entity.Property(e => e.Faprofitcentref).HasColumnName("FAPROFITCENTREF");
+
+                entity.Property(e => e.Faraccref).HasColumnName("FARACCREF");
+
+                entity.Property(e => e.Farcenterref).HasColumnName("FARCENTERREF");
+
+                entity.Property(e => e.Faregbinddate)
+                    .HasColumnName("FAREGBINDDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Faregref).HasColumnName("FAREGREF");
+
+                entity.Property(e => e.Fromordwithpay).HasColumnName("FROMORDWITHPAY");
+
+                entity.Property(e => e.Fromtransfer).HasColumnName("FROMTRANSFER");
+
+                entity.Property(e => e.Ftime).HasColumnName("FTIME");
+
+                entity.Property(e => e.Futmonthbegdate).HasColumnName("FUTMONTHBEGDATE");
+
+                entity.Property(e => e.Futmonthcnt).HasColumnName("FUTMONTHCNT");
+
+                entity.Property(e => e.Globalid)
+                    .HasColumnName("GLOBALID")
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Globtrans).HasColumnName("GLOBTRANS");
+
+                entity.Property(e => e.Grossuinfo1).HasColumnName("GROSSUINFO1");
+
+                entity.Property(e => e.Grossuinfo2).HasColumnName("GROSSUINFO2");
+
+                entity.Property(e => e.Gtipcode)
+                    .HasColumnName("GTIPCODE")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasMaxLength(37)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ineffectivecost).HasColumnName("INEFFECTIVECOST");
+
+                entity.Property(e => e.Infdate)
+                    .HasColumnName("INFDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Infidx).HasColumnName("INFIDX");
+
+                entity.Property(e => e.Infidxufrs).HasColumnName("INFIDXUFRS");
+
+                entity.Property(e => e.Insexpline).HasColumnName("INSEXPLINE");
+
+                entity.Property(e => e.Invoicelnno).HasColumnName("INVOICELNNO");
+
+                entity.Property(e => e.Invoiceref).HasColumnName("INVOICEREF");
+
+                entity.Property(e => e.Iocode).HasColumnName("IOCODE");
+
+                entity.Property(e => e.Lineexp)
+                    .HasColumnName("LINEEXP")
+                    .HasMaxLength(251)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Linenet).HasColumnName("LINENET");
+
+                entity.Property(e => e.Linetype).HasColumnName("LINETYPE");
+
+                entity.Property(e => e.Lprodrsrvstat).HasColumnName("LPRODRSRVSTAT");
+
+                entity.Property(e => e.Lprodstat).HasColumnName("LPRODSTAT");
+
+                entity.Property(e => e.Madeofshred).HasColumnName("MADEOFSHRED");
+
+                entity.Property(e => e.Mainstlnref).HasColumnName("MAINSTLNREF");
+
+                entity.Property(e => e.Month).HasColumnName("MONTH_");
+
+                entity.Property(e => e.Netdiscamnt).HasColumnName("NETDISCAMNT");
+
+                entity.Property(e => e.Netdiscflag).HasColumnName("NETDISCFLAG");
+
+                entity.Property(e => e.Netdiscperc).HasColumnName("NETDISCPERC");
+
+                entity.Property(e => e.Offerref).HasColumnName("OFFERREF");
+
+                entity.Property(e => e.Offtransref).HasColumnName("OFFTRANSREF");
+
+                entity.Property(e => e.Ordficheref).HasColumnName("ORDFICHEREF");
+
+                entity.Property(e => e.Ordtransref).HasColumnName("ORDTRANSREF");
+
+                entity.Property(e => e.Orglogicref).HasColumnName("ORGLOGICREF");
+
+                entity.Property(e => e.Orglogoid)
+                    .HasColumnName("ORGLOGOID")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Othraddtaxaref).HasColumnName("OTHRADDTAXAREF");
+
+                entity.Property(e => e.Othraddtaxcref).HasColumnName("OTHRADDTAXCREF");
+
+                entity.Property(e => e.Outcost).HasColumnName("OUTCOST");
+
+                entity.Property(e => e.Outcostcurr).HasColumnName("OUTCOSTCURR");
+
+                entity.Property(e => e.Outcostcurrufrs).HasColumnName("OUTCOSTCURRUFRS");
+
+                entity.Property(e => e.Outcostufrs).HasColumnName("OUTCOSTUFRS");
+
+                entity.Property(e => e.Outputidcode)
+                    .HasColumnName("OUTPUTIDCODE")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Outremamnt).HasColumnName("OUTREMAMNT");
+
+                entity.Property(e => e.Outremcost).HasColumnName("OUTREMCOST");
+
+                entity.Property(e => e.Outremcostcurr).HasColumnName("OUTREMCOSTCURR");
+
+                entity.Property(e => e.Outremcostcurrufrs).HasColumnName("OUTREMCOSTCURRUFRS");
+
+                entity.Property(e => e.Outremcostufrs).HasColumnName("OUTREMCOSTUFRS");
+
+                entity.Property(e => e.Parentlnref).HasColumnName("PARENTLNREF");
+
+                entity.Property(e => e.Paydefref).HasColumnName("PAYDEFREF");
+
+                entity.Property(e => e.Plnamount).HasColumnName("PLNAMOUNT");
+
+                entity.Property(e => e.Plndefserilotno)
+                    .HasColumnName("PLNDEFSERILOTNO")
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Plnsttranspernr).HasColumnName("PLNSTTRANSPERNR");
+
+                entity.Property(e => e.Plnsttransref).HasColumnName("PLNSTTRANSREF");
+
+                entity.Property(e => e.Plnunrsrvamount).HasColumnName("PLNUNRSRVAMOUNT");
+
+                entity.Property(e => e.Pointcampref).HasColumnName("POINTCAMPREF");
+
+                entity.Property(e => e.Pointcamprefs1).HasColumnName("POINTCAMPREFS1");
+
+                entity.Property(e => e.Pointcamprefs2).HasColumnName("POINTCAMPREFS2");
+
+                entity.Property(e => e.Pointcamprefs3).HasColumnName("POINTCAMPREFS3");
+
+                entity.Property(e => e.Pointcamprefs4).HasColumnName("POINTCAMPREFS4");
+
+                entity.Property(e => e.Polineref).HasColumnName("POLINEREF");
+
+                entity.Property(e => e.Pordclsplnamnt).HasColumnName("PORDCLSPLNAMNT");
+
+                entity.Property(e => e.Pordclsplnunrsrvamnt).HasColumnName("PORDCLSPLNUNRSRVAMNT");
+
+                entity.Property(e => e.Porderficheno)
+                    .HasColumnName("PORDERFICHENO")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Pordsymoutln).HasColumnName("PORDSYMOUTLN");
+
+                entity.Property(e => e.Praccref).HasColumnName("PRACCREF");
+
+                entity.Property(e => e.Prcenterref).HasColumnName("PRCENTERREF");
+
+                entity.Property(e => e.Prclistref).HasColumnName("PRCLISTREF");
+
+                entity.Property(e => e.Prcurr).HasColumnName("PRCURR");
+
+                entity.Property(e => e.Prdexptotal).HasColumnName("PRDEXPTOTAL");
+
+                entity.Property(e => e.Prdordslplnreserve).HasColumnName("PRDORDSLPLNRESERVE");
+
+                entity.Property(e => e.Prdordtotcoef).HasColumnName("PRDORDTOTCOEF");
+
+                entity.Property(e => e.Prevataxprcostcurr).HasColumnName("PREVATAXPRCOSTCURR");
+
+                entity.Property(e => e.Previousataxprcost).HasColumnName("PREVIOUSATAXPRCOST");
+
+                entity.Property(e => e.Previousoutcost).HasColumnName("PREVIOUSOUTCOST");
+
+                entity.Property(e => e.Prevlineno).HasColumnName("PREVLINENO");
+
+                entity.Property(e => e.Prevlineref).HasColumnName("PREVLINEREF");
+
+                entity.Property(e => e.Prevoutcostcurr).HasColumnName("PREVOUTCOSTCURR");
+
+                entity.Property(e => e.Price).HasColumnName("PRICE");
+
+                entity.Property(e => e.Prodorderref).HasColumnName("PRODORDERREF");
+
+                entity.Property(e => e.Prodordertyp).HasColumnName("PRODORDERTYP");
+
+                entity.Property(e => e.Projectref).HasColumnName("PROJECTREF");
+
+                entity.Property(e => e.Promclasitemref).HasColumnName("PROMCLASITEMREF");
+
+                entity.Property(e => e.Promref).HasColumnName("PROMREF");
+
+                entity.Property(e => e.Proutcostcrufrsdiff).HasColumnName("PROUTCOSTCRUFRSDIFF");
+
+                entity.Property(e => e.Proutcostufrsdiff).HasColumnName("PROUTCOSTUFRSDIFF");
+
+                entity.Property(e => e.Prprice).HasColumnName("PRPRICE");
+
+                entity.Property(e => e.Prrate).HasColumnName("PRRATE");
+
+                entity.Property(e => e.Prvataccref).HasColumnName("PRVATACCREF");
+
+                entity.Property(e => e.Prvatcenref).HasColumnName("PRVATCENREF");
+
+                entity.Property(e => e.Publiccountryref).HasColumnName("PUBLICCOUNTRYREF");
+
+                entity.Property(e => e.Purchaccref).HasColumnName("PURCHACCREF");
+
+                entity.Property(e => e.Purchaccrefufrs).HasColumnName("PURCHACCREFUFRS");
+
+                entity.Property(e => e.Purchcentref).HasColumnName("PURCHCENTREF");
+
+                entity.Property(e => e.Purchcentrefufrs).HasColumnName("PURCHCENTREFUFRS");
+
+                entity.Property(e => e.Qctransferamnt).HasColumnName("QCTRANSFERAMNT");
+
+                entity.Property(e => e.Qctransferref).HasColumnName("QCTRANSFERREF");
+
+                entity.Property(e => e.Qprodfcref).HasColumnName("QPRODFCREF");
+
+                entity.Property(e => e.Qprodfctyp).HasColumnName("QPRODFCTYP");
+
+                entity.Property(e => e.Qproditemtype).HasColumnName("QPRODITEMTYPE");
+
+                entity.Property(e => e.Recstatus).HasColumnName("RECSTATUS");
+
+                entity.Property(e => e.Reflaccref).HasColumnName("REFLACCREF");
+
+                entity.Property(e => e.Reflothaccref).HasColumnName("REFLOTHACCREF");
+
+                entity.Property(e => e.Reflvataccref).HasColumnName("REFLVATACCREF");
+
+                entity.Property(e => e.Reflvatothaccref).HasColumnName("REFLVATOTHACCREF");
+
+                entity.Property(e => e.Regtypref).HasColumnName("REGTYPREF");
+
+                entity.Property(e => e.Reltransfcref).HasColumnName("RELTRANSFCREF");
+
+                entity.Property(e => e.Reltranslnref).HasColumnName("RELTRANSLNREF");
+
+                entity.Property(e => e.Reportrate).HasColumnName("REPORTRATE");
+
+                entity.Property(e => e.Retamount).HasColumnName("RETAMOUNT");
+
+                entity.Property(e => e.Retcost).HasColumnName("RETCOST");
+
+                entity.Property(e => e.Retcostcurr).HasColumnName("RETCOSTCURR");
+
+                entity.Property(e => e.Retcostcurrufrs).HasColumnName("RETCOSTCURRUFRS");
+
+                entity.Property(e => e.Retcosttype).HasColumnName("RETCOSTTYPE");
+
+                entity.Property(e => e.Retcostufrs).HasColumnName("RETCOSTUFRS");
+
+                entity.Property(e => e.Salesmanref).HasColumnName("SALESMANREF");
+
+                entity.Property(e => e.Siteid).HasColumnName("SITEID");
+
+                entity.Property(e => e.Sourcecostgrp).HasColumnName("SOURCECOSTGRP");
+
+                entity.Property(e => e.Sourceindex).HasColumnName("SOURCEINDEX");
+
+                entity.Property(e => e.Sourcelink).HasColumnName("SOURCELINK");
+
+                entity.Property(e => e.Sourcepolnref).HasColumnName("SOURCEPOLNREF");
+
+                entity.Property(e => e.Sourcetype).HasColumnName("SOURCETYPE");
+
+                entity.Property(e => e.Sourcewsref).HasColumnName("SOURCEWSREF");
+
+                entity.Property(e => e.Specode)
+                    .HasColumnName("SPECODE")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Specode2)
+                    .HasColumnName("SPECODE2")
+                    .HasMaxLength(41)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status).HasColumnName("STATUS");
+
+                entity.Property(e => e.Stdrpunitcost).HasColumnName("STDRPUNITCOST");
+
+                entity.Property(e => e.Stdunitcost).HasColumnName("STDUNITCOST");
+
+                entity.Property(e => e.Stfichelnno).HasColumnName("STFICHELNNO");
+
+                entity.Property(e => e.Stficheref).HasColumnName("STFICHEREF");
+
+                entity.Property(e => e.Stockref).HasColumnName("STOCKREF");
+
+                entity.Property(e => e.Subcontorderref).HasColumnName("SUBCONTORDERREF");
+
+                entity.Property(e => e.Textinc).HasColumnName("TEXTINC");
+
+                entity.Property(e => e.Total).HasColumnName("TOTAL");
+
+                entity.Property(e => e.Transexpline).HasColumnName("TRANSEXPLINE");
+
+                entity.Property(e => e.Transqcok).HasColumnName("TRANSQCOK");
+
+                entity.Property(e => e.Trcode).HasColumnName("TRCODE");
+
+                entity.Property(e => e.Trcurr).HasColumnName("TRCURR");
+
+                entity.Property(e => e.Trrate).HasColumnName("TRRATE");
+
+                entity.Property(e => e.Uinfo1).HasColumnName("UINFO1");
+
+                entity.Property(e => e.Uinfo2).HasColumnName("UINFO2");
+
+                entity.Property(e => e.Uinfo3).HasColumnName("UINFO3");
+
+                entity.Property(e => e.Uinfo4).HasColumnName("UINFO4");
+
+                entity.Property(e => e.Uinfo5).HasColumnName("UINFO5");
+
+                entity.Property(e => e.Uinfo6).HasColumnName("UINFO6");
+
+                entity.Property(e => e.Uinfo7).HasColumnName("UINFO7");
+
+                entity.Property(e => e.Uinfo8).HasColumnName("UINFO8");
+
+                entity.Property(e => e.Underdeductlimit).HasColumnName("UNDERDEDUCTLIMIT");
+
+                entity.Property(e => e.Uomref).HasColumnName("UOMREF");
+
+                entity.Property(e => e.Updthisline).HasColumnName("UPDTHISLINE");
+
+                entity.Property(e => e.Usref).HasColumnName("USREF");
+
+                entity.Property(e => e.Variantref).HasColumnName("VARIANTREF");
+
+                entity.Property(e => e.Vat).HasColumnName("VAT");
+
+                entity.Property(e => e.Vataccref).HasColumnName("VATACCREF");
+
+                entity.Property(e => e.Vatamnt).HasColumnName("VATAMNT");
+
+                entity.Property(e => e.Vatcalcdiff).HasColumnName("VATCALCDIFF");
+
+                entity.Property(e => e.Vatcenterref).HasColumnName("VATCENTERREF");
+
+                entity.Property(e => e.Vatexceptcode)
+                    .HasColumnName("VATEXCEPTCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Vatexceptreason)
+                    .HasColumnName("VATEXCEPTREASON")
+                    .HasMaxLength(201)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Vatinc).HasColumnName("VATINC");
+
+                entity.Property(e => e.Vatmatrah).HasColumnName("VATMATRAH");
+
+                entity.Property(e => e.Vendcomm).HasColumnName("VENDCOMM");
+
+                entity.Property(e => e.Wfstatus).HasColumnName("WFSTATUS");
+
+                entity.Property(e => e.Xprice).HasColumnName("XPRICE");
+
+                entity.Property(e => e.Xpriceupd).HasColumnName("XPRICEUPD");
+
+                entity.Property(e => e.Xreprate).HasColumnName("XREPRATE");
+
+                entity.Property(e => e.Year).HasColumnName("YEAR_");
+            });
+            modelBuilder.Entity<Lg00101Clfline>(entity =>
+            {
+                entity.HasKey(e => e.Logicalref)
+                    .HasName("I001_01_CLFLINE_I1");
+
+                entity.ToTable("LG_001_01_CLFLINE");
+
+                entity.HasIndex(e => e.Accficheref)
+                    .HasName("I001_01_CLFLINE_I6");
+
+                entity.HasIndex(e => new { e.Modulenr, e.Sourcefref })
+                    .HasName("I001_01_CLFLINE_I5");
+
+                entity.HasIndex(e => new { e.Sourcefref, e.Linenr })
+                    .HasName("I001_01_CLFLINE_I7");
+
+                entity.HasIndex(e => new { e.Date, e.Trcode, e.Tranno })
+                    .HasName("I001_01_CLFLINE_I3");
+
+                entity.HasIndex(e => new { e.Sourcefref, e.Modulenr, e.Linenr })
+                    .HasName("I001_01_CLFLINE_I8");
+
+                entity.HasIndex(e => new { e.Trcode, e.Tranno, e.Linenr })
+                    .HasName("I001_01_CLFLINE_I2");
+
+                entity.HasIndex(e => new { e.Clientref, e.Date, e.Modulenr, e.Trcode })
+                    .HasName("I001_01_CLFLINE_I4");
+
+                entity.Property(e => e.Logicalref).HasColumnName("LOGICALREF");
+
+                entity.Property(e => e.Accficheref).HasColumnName("ACCFICHEREF");
+
+                entity.Property(e => e.Accounted).HasColumnName("ACCOUNTED");
+
+                entity.Property(e => e.Affectcollatrl).HasColumnName("AFFECTCOLLATRL");
+
+                entity.Property(e => e.Affectcost).HasColumnName("AFFECTCOST");
+
+                entity.Property(e => e.Affectrisk).HasColumnName("AFFECTRISK");
+
+                entity.Property(e => e.Amount).HasColumnName("AMOUNT");
+
+                entity.Property(e => e.Approvenr).HasColumnName("APPROVENR");
+
+                entity.Property(e => e.Approvenum)
+                    .HasColumnName("APPROVENUM")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Bankaccref).HasColumnName("BANKACCREF");
+
+                entity.Property(e => e.Batchnr).HasColumnName("BATCHNR");
+
+                entity.Property(e => e.Batchnum)
+                    .HasColumnName("BATCHNUM")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Bnaccref).HasColumnName("BNACCREF");
+
+                entity.Property(e => e.Bncenterref).HasColumnName("BNCENTERREF");
+
+                entity.Property(e => e.Bnlntrcurr).HasColumnName("BNLNTRCURR");
+
+                entity.Property(e => e.Bnlntrnet).HasColumnName("BNLNTRNET");
+
+                entity.Property(e => e.Bnlntrrate).HasColumnName("BNLNTRRATE");
+
+                entity.Property(e => e.Branch).HasColumnName("BRANCH");
+
+                entity.Property(e => e.Brutamount).HasColumnName("BRUTAMOUNT");
+
+                entity.Property(e => e.Brutamountrep).HasColumnName("BRUTAMOUNTREP");
+
+                entity.Property(e => e.Brutamounttr).HasColumnName("BRUTAMOUNTTR");
+
+                entity.Property(e => e.Cancelled).HasColumnName("CANCELLED");
+
+                entity.Property(e => e.Candeduct).HasColumnName("CANDEDUCT");
+
+                entity.Property(e => e.Cantcrededuct).HasColumnName("CANTCREDEDUCT");
+
+                entity.Property(e => e.CapiblockCreadeddate)
+                    .HasColumnName("CAPIBLOCK_CREADEDDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CapiblockCreatedby).HasColumnName("CAPIBLOCK_CREATEDBY");
+
+                entity.Property(e => e.CapiblockCreatedhour).HasColumnName("CAPIBLOCK_CREATEDHOUR");
+
+                entity.Property(e => e.CapiblockCreatedmin).HasColumnName("CAPIBLOCK_CREATEDMIN");
+
+                entity.Property(e => e.CapiblockCreatedsec).HasColumnName("CAPIBLOCK_CREATEDSEC");
+
+                entity.Property(e => e.CapiblockModifiedby).HasColumnName("CAPIBLOCK_MODIFIEDBY");
+
+                entity.Property(e => e.CapiblockModifieddate)
+                    .HasColumnName("CAPIBLOCK_MODIFIEDDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CapiblockModifiedhour).HasColumnName("CAPIBLOCK_MODIFIEDHOUR");
+
+                entity.Property(e => e.CapiblockModifiedmin).HasColumnName("CAPIBLOCK_MODIFIEDMIN");
+
+                entity.Property(e => e.CapiblockModifiedsec).HasColumnName("CAPIBLOCK_MODIFIEDSEC");
+
+                entity.Property(e => e.Cashaccountref).HasColumnName("CASHACCOUNTREF");
+
+                entity.Property(e => e.Cashamount).HasColumnName("CASHAMOUNT");
+
+                entity.Property(e => e.Cashcenterref).HasColumnName("CASHCENTERREF");
+
+                entity.Property(e => e.Cheqinfo)
+                    .HasColumnName("CHEQINFO")
+                    .HasMaxLength(121)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Claccref).HasColumnName("CLACCREF");
+
+                entity.Property(e => e.Clcenterref).HasColumnName("CLCENTERREF");
+
+                entity.Property(e => e.Clientref).HasColumnName("CLIENTREF");
+
+                entity.Property(e => e.Clprjref).HasColumnName("CLPRJREF");
+
+                entity.Property(e => e.Creditcno)
+                    .HasColumnName("CREDITCNO")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Cyphcode)
+                    .HasColumnName("CYPHCODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("DATE_")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Deductionpart1).HasColumnName("DEDUCTIONPART1");
+
+                entity.Property(e => e.Deductionpart2).HasColumnName("DEDUCTIONPART2");
+
+                entity.Property(e => e.Department).HasColumnName("DEPARTMENT");
+
+                entity.Property(e => e.Devir).HasColumnName("DEVIR");
+
+                entity.Property(e => e.Devirmodulenr).HasColumnName("DEVIRMODULENR");
+
+                entity.Property(e => e.Devirprocdate)
+                    .HasColumnName("DEVIRPROCDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Discaccref).HasColumnName("DISCACCREF");
+
+                entity.Property(e => e.Disccenref).HasColumnName("DISCCENREF");
+
+                entity.Property(e => e.Discflag).HasColumnName("DISCFLAG");
+
+                entity.Property(e => e.Discrate).HasColumnName("DISCRATE");
+
+                entity.Property(e => e.Docdate)
+                    .HasColumnName("DOCDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Docode)
+                    .HasColumnName("DOCODE")
+                    .HasMaxLength(33)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Eidistflnnr).HasColumnName("EIDISTFLNNR");
+
+                entity.Property(e => e.Eisrvdsttyp).HasColumnName("EISRVDSTTYP");
+
+                entity.Property(e => e.Emflineref).HasColumnName("EMFLINEREF");
+
+                entity.Property(e => e.Euvatstatus).HasColumnName("EUVATSTATUS");
+
+                entity.Property(e => e.Eximdisttyp).HasColumnName("EXIMDISTTYP");
+
+                entity.Property(e => e.Eximfilecodeclf)
+                    .HasColumnName("EXIMFILECODECLF")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Eximfileref).HasColumnName("EXIMFILEREF");
+
+                entity.Property(e => e.Eximprocnr).HasColumnName("EXIMPROCNR");
+
+                entity.Property(e => e.Eximtype).HasColumnName("EXIMTYPE");
+
+                entity.Property(e => e.Extenref).HasColumnName("EXTENREF");
+
+                entity.Property(e => e.Forexim).HasColumnName("FOREXIM");
+
+                entity.Property(e => e.Fromexchdiff).HasColumnName("FROMEXCHDIFF");
+
+                entity.Property(e => e.Ftime).HasColumnName("FTIME");
+
+                entity.Property(e => e.Fundsharerat).HasColumnName("FUNDSHARERAT");
+
+                entity.Property(e => e.Grpfirmtrans).HasColumnName("GRPFIRMTRANS");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasMaxLength(37)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Incdeductamnt).HasColumnName("INCDEDUCTAMNT");
+
+                entity.Property(e => e.Infidx).HasColumnName("INFIDX");
+
+                entity.Property(e => e.Instalref).HasColumnName("INSTALREF");
+
+                entity.Property(e => e.Lineexctyp).HasColumnName("LINEEXCTYP");
+
+                entity.Property(e => e.Lineexp)
+                    .HasColumnName("LINEEXP")
+                    .HasMaxLength(251)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Linenr).HasColumnName("LINENR");
+
+                entity.Property(e => e.Modulenr).HasColumnName("MODULENR");
+
+                entity.Property(e => e.Month).HasColumnName("MONTH_");
+
+                entity.Property(e => e.Netamount).HasColumnName("NETAMOUNT");
+
+                entity.Property(e => e.Netamountrep).HasColumnName("NETAMOUNTREP");
+
+                entity.Property(e => e.Netamounttr).HasColumnName("NETAMOUNTTR");
+
+                entity.Property(e => e.Offerref).HasColumnName("OFFERREF");
+
+                entity.Property(e => e.Onlyonepayline).HasColumnName("ONLYONEPAYLINE");
+
+                entity.Property(e => e.Orglogicref).HasColumnName("ORGLOGICREF");
+
+                entity.Property(e => e.Orglogoid)
+                    .HasColumnName("ORGLOGOID")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Paidincash).HasColumnName("PAIDINCASH");
+
+                entity.Property(e => e.Paydefref).HasColumnName("PAYDEFREF");
+
+                entity.Property(e => e.Paymentref).HasColumnName("PAYMENTREF");
+
+                entity.Property(e => e.Pointcommaccref).HasColumnName("POINTCOMMACCREF");
+
+                entity.Property(e => e.Pointcommcenref).HasColumnName("POINTCOMMCENREF");
+
+                entity.Property(e => e.Poscommaccref).HasColumnName("POSCOMMACCREF");
+
+                entity.Property(e => e.Poscommcenref).HasColumnName("POSCOMMCENREF");
+
+                entity.Property(e => e.Printcnt).HasColumnName("PRINTCNT");
+
+                entity.Property(e => e.Printdate)
+                    .HasColumnName("PRINTDATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Recstatus).HasColumnName("RECSTATUS");
+
+                entity.Property(e => e.Reflvataccref).HasColumnName("REFLVATACCREF");
+
+                entity.Property(e => e.Reflvatothaccref).HasColumnName("REFLVATOTHACCREF");
+
+                entity.Property(e => e.Reportnet).HasColumnName("REPORTNET");
+
+                entity.Property(e => e.Reportrate).HasColumnName("REPORTRATE");
+
+                entity.Property(e => e.Retccfcref).HasColumnName("RETCCFCREF");
+
+                entity.Property(e => e.Salesmanref).HasColumnName("SALESMANREF");
+
+                entity.Property(e => e.Sign).HasColumnName("SIGN");
+
+                entity.Property(e => e.Siteid).HasColumnName("SITEID");
+
+                entity.Property(e => e.Sourcefref).HasColumnName("SOURCEFREF");
+
+                entity.Property(e => e.Specode)
+                    .HasColumnName("SPECODE")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Specode2)
+                    .HasColumnName("SPECODE2")
+                    .HasMaxLength(41)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status).HasColumnName("STATUS");
+
+                entity.Property(e => e.Tradinggrp)
+                    .HasColumnName("TRADINGGRP")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tranno)
+                    .HasColumnName("TRANNO")
+                    .HasMaxLength(17)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Trcode).HasColumnName("TRCODE");
+
+                entity.Property(e => e.Trcurr).HasColumnName("TRCURR");
+
+                entity.Property(e => e.Trgflag).HasColumnName("TRGFLAG");
+
+                entity.Property(e => e.Trnet).HasColumnName("TRNET");
+
+                entity.Property(e => e.Trrate).HasColumnName("TRRATE");
+
+                entity.Property(e => e.Underdeductlimit).HasColumnName("UNDERDEDUCTLIMIT");
+
+                entity.Property(e => e.Vatamount).HasColumnName("VATAMOUNT");
+
+                entity.Property(e => e.Vatdeductaccref).HasColumnName("VATDEDUCTACCREF");
+
+                entity.Property(e => e.Vatdeductcenref).HasColumnName("VATDEDUCTCENREF");
+
+                entity.Property(e => e.Vatdeductothaccref).HasColumnName("VATDEDUCTOTHACCREF");
+
+                entity.Property(e => e.Vatdeductothcenref).HasColumnName("VATDEDUCTOTHCENREF");
+
+                entity.Property(e => e.Vatdeductrate).HasColumnName("VATDEDUCTRATE");
+
+                entity.Property(e => e.Vatraccref).HasColumnName("VATRACCREF");
+
+                entity.Property(e => e.Vatrate).HasColumnName("VATRATE");
+
+                entity.Property(e => e.Vatrcenref).HasColumnName("VATRCENREF");
+
+                entity.Property(e => e.Virmanref).HasColumnName("VIRMANREF");
+
+                entity.Property(e => e.Year).HasColumnName("YEAR_");
+            });
 
             OnModelCreatingPartial(modelBuilder);
 

@@ -105,8 +105,20 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
+        // GET: api/Orders/byOrder/5
+        [HttpGet("byOrder/{id}")]
+        public Order GetOrderByOrder(int id)
+        {
+            var order = _context.orders.Where(p => p.statusId == 5 && p.Id == id).FirstOrDefault();
+            int ID = order.Id;
+            if (order == null)
+            {
+                return null;
+            }
 
-       
+            return (order);
+        }
+
 
 
         // PUT: api/Orders/5
