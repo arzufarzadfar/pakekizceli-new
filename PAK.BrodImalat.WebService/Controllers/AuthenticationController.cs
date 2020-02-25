@@ -32,8 +32,6 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-
-
         [HttpPost]
             [Route("login")]
             [EnableCors("MyPolicy")]
@@ -47,8 +45,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
                     var userRoles = await userManager.GetRolesAsync(user);
-                    ////var userRoles1 = await userManager.getuser
-
+                   ////var userRoles1 = await userManager.getuser
 
                     var claims = new List<Claim>
 
@@ -57,7 +54,10 @@ namespace PAK.BrodImalat.WebService.Controllers
 
                     new Claim (JwtRegisteredClaimNames.Email, user.Email ),
 
-                      new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                      new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    
+
+                        new Claim ("id","200")
 
 
                   };
@@ -85,7 +85,6 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-
                 return Ok(new
                 {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -95,17 +94,9 @@ namespace PAK.BrodImalat.WebService.Controllers
                     lastName = user.lastName,
                     message = "Giriş Başarılı",
 
-
-                   
-
-
             }); ;
 
-              
-              
-
-
-
+          
             }
             else
                 {
@@ -117,43 +108,31 @@ namespace PAK.BrodImalat.WebService.Controllers
                     });
                 }
 
-
-         
-
+            
         }
 
-      
 
-        //[HttpPost]
+        [HttpGet("gettoken")]
+        public ActionResult<string> gettoken()
+        {
+           var emailclime = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals( "id", StringComparison.InvariantCultureIgnoreCase));
+            if (emailclime != null)
+            {
 
-        //[AllowAnonymous]
-        //[Route("refreshToken")]
+                return Ok(new
+                {
 
-        //public async Task<IActionResult> RefreshToken(string authenticationToken, string refreshToken)
-        //{
-        //    var principal = _context.AspNetUserTokens.(authenticationToken);
-        //    var username = principal.Identity.Name; //this is mapped to the Name claim by default
+                    expiresRefresh = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20),
 
-        //    var user = _context.AspNetUserTokens.SingleOrDefault(u => u.UserId == username);
-        //    if (user == null || user.RefreshToken != refreshToken) return BadRequest();
+                    Exception = $"OK:{ emailclime.Value}"
 
-        //    var newJwtToken = _tokenService.GenerateAccessToken(principal.Claims);
-        //    var newRefreshToken = _tokenService.GenerateRefreshToken();
-
-        //    user.RefreshToken = newRefreshToken;
-        //    await _context.SaveChangesAsync();
-
-        //    return new ObjectResult(new
-        //    {
-        //        authenticationToken = newJwtToken,
-        //        refreshToken = newRefreshToken
-        //    });
-        //}
+                 });
 
 
+            }
+           return BadRequest("404");
+        }
 
-
-
-
+   
     }
 }
