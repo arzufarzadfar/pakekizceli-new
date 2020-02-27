@@ -39,7 +39,7 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
         // POST: api/NetUsers
-        [HttpPost]
+        //[HttpPost]
         //public IActionResult Post([FromBody] AspNetUsers model)
         //{
 

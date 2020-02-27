@@ -55,12 +55,16 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
-        [HttpPost]
+            [HttpPost]
             [Route("login")]
             [EnableCors("MyPolicy")]
-            public async Task<IActionResult> Login([FromBody] LoginModel model)
+            [AllowAnonymous]
+            [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login( LoginModel model, string returnUrl = null)
             {
-                ServiceResponse<LoginModel> response = new ServiceResponse<LoginModel>();
+               
+
+            ServiceResponse<LoginModel> response = new ServiceResponse<LoginModel>();
 
                 var user = await userManager.FindByNameAsync(model.UserName);  // await emza braye asankron
                 if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
@@ -76,11 +80,12 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
                     new Claim (JwtRegisteredClaimNames.Email, user.Email ),
+                    new Claim (JwtRegisteredClaimNames.NameId, user.Id ),
 
                       new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     
 
-                        new Claim ("id","200")
+                        new Claim ("iid","200")
 
 
                   };
@@ -134,9 +139,6 @@ namespace PAK.BrodImalat.WebService.Controllers
                 }
 
 
-
-
-
         }
 
 
@@ -145,7 +147,7 @@ namespace PAK.BrodImalat.WebService.Controllers
         [HttpGet("gettoken")]
         public ActionResult<string> gettoken()
         {
-           var emailclime = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals( "id", StringComparison.InvariantCultureIgnoreCase));
+           var emailclime = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals( "iid", StringComparison.InvariantCultureIgnoreCase));
             if (emailclime != null)
             {
 
@@ -160,7 +162,11 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
             }
-           return BadRequest("404");
+            //HttpContext.Session.Clear();
+            //////return Redirect("~/Home/Index");
+
+            return BadRequest("404");
+           
         }
 
    

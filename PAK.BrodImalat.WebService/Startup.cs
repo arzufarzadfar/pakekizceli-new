@@ -47,7 +47,7 @@ namespace PAK.BrodImalat.WebService
                 .AllowAnyHeader();
 
             }));
-            
+
 
 
 
@@ -57,6 +57,9 @@ namespace PAK.BrodImalat.WebService
 
             //services.Configure<Controllers.ClientsController>(Configuration);
             // services.AddTransient<Controllers.ClientsController>();
+
+           
+              
 
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -69,6 +72,7 @@ namespace PAK.BrodImalat.WebService
                 Options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 Options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 Options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                
             })
                .AddJwtBearer(Options =>
                {
@@ -104,7 +108,7 @@ namespace PAK.BrodImalat.WebService
 
 
 
-            SeedData.Add(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
+            ////SeedData.Add(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
