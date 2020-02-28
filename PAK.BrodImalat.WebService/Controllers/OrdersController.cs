@@ -219,25 +219,33 @@ namespace PAK.BrodImalat.WebService.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
+
+
+
+
             _context.orders.Add(order);
             _context.Database.OpenConnection();
+               
 
             try
-            {
+                {
 
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.orders ON");
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.orders ON");
+
+               
                 _context.SaveChanges();
-                _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.orders OFF");
+                    _context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.orders OFF");
 
-            }
+                }
 
-            finally
-            {
-                _context.Database.CloseConnection();
+                finally
+                {
+                    _context.Database.CloseConnection();
 
 
-            }
-            await _context.SaveChangesAsync();
+                }
+                await _context.SaveChangesAsync();
+           
 
             return CreatedAtAction("GetOrder", new { id = order.Id }, order);
         }

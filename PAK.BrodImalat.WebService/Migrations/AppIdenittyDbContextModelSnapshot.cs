@@ -467,54 +467,16 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.ToTable("status");
                 });
 
-            modelBuilder.Entity("PAK.BrodImalat.WebService.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("users");
-                });
-
             modelBuilder.Entity("PAK.BrodImalat.WebService.ModelsTokenUser.TokenResource", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("Expiration")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("mod")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -575,33 +537,33 @@ namespace PAK.BrodImalat.WebService.Migrations
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.AltUnit", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.MainUnit", "MainUnit")
-                        .WithMany()
+                        .WithMany("altUnits")
                         .HasForeignKey("MainUnitId");
                 });
 
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.Order", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("orders")
                         .HasForeignKey("ClientId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Status", "status")
-                        .WithMany()
+                        .WithMany("order")
                         .HasForeignKey("statusId");
                 });
 
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.OrderDetail", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.AltUnit", "AltUnit")
-                        .WithMany()
+                        .WithMany("orderDetails")
                         .HasForeignKey("AltUnitId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Item", "Item")
-                        .WithMany()
+                        .WithMany("orderDetails")
                         .HasForeignKey("ItemId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Order", "Order")
-                        .WithMany()
+                        .WithMany("orderDetails")
                         .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618

@@ -29,7 +29,7 @@ namespace PAK.BrodImalat.WebService.Data
         public DbSet<Order> orders { get; set; }
         public DbSet<OrderDetail> orderDetails { get; set; }
         public DbSet<Status> status { get; set; }
-        public DbSet<User> users { get; set; }
+      
         public DbSet<Implamentaion> implamentaions { get; set; }
         public DbSet<PAK.BrodImalat.WebService.ModelsTokenUser.TokenResource> TokenResource { get; set; }
         public DbSet<TokenResource> tokenResources { get; set; }

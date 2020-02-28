@@ -16,7 +16,7 @@ namespace PAK.BrodImalat.WebService.Models
         public int StatuCode { get; set; }
 
 
-        //public List<Order> order { get; set; }
+        public List<Order> order { get; set; }
 
 
 

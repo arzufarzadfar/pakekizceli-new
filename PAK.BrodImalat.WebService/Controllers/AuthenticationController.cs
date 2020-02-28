@@ -24,12 +24,17 @@ namespace PAK.BrodImalat.WebService.Controllers
     {
 
            private UserManager<ApplicationUser> userManager;
-         
+        private readonly AppIdenittyDbContext _context;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager)
+
+
+
+
+        public AuthenticationController(UserManager<ApplicationUser> userManager, AppIdenittyDbContext _context)
             {
                 this.userManager = userManager;
-            }
+            this._context = _context;
+        }
 
         [Route("register")]
         [HttpPost]
@@ -58,8 +63,7 @@ namespace PAK.BrodImalat.WebService.Controllers
             [HttpPost]
             [Route("login")]
             [EnableCors("MyPolicy")]
-            [AllowAnonymous]
-            [ValidateAntiForgeryToken]
+           
         public async Task<IActionResult> Login( LoginModel model, string returnUrl = null)
             {
                
@@ -112,6 +116,20 @@ namespace PAK.BrodImalat.WebService.Controllers
                         );
 
 
+                if (ModelState.IsValid)
+                {
+
+
+                    TokenController tokenuser = new TokenController(_context);
+                    TokenResource tok1 = new TokenResource();
+                    tok1.Id = user.Id;
+                    tok1.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                   
+                    tok1.mod = 1;
+                    tokenuser.posttoken(tok1);
+
+
+                }
 
 
                 return Ok(new
@@ -141,6 +159,33 @@ namespace PAK.BrodImalat.WebService.Controllers
 
         }
 
+
+
+
+        [HttpGet("getuser")]
+        public ActionResult<string> getuser()
+        {
+            var emailclime = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.Email, StringComparison.OrdinalIgnoreCase));
+            if (emailclime != null)
+            {
+
+                return Ok(new
+                {
+
+                    expiresRefresh = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20),
+
+                    Exception = $"OK:{ emailclime.Value}"
+
+                });
+
+
+            }
+            //HttpContext.Session.Clear();
+            //////return Redirect("~/Home/Index");
+
+            return BadRequest("404");
+
+        }
 
 
 

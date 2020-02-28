@@ -18,7 +18,7 @@ namespace PAK.BrodImalat.WebService.Models
         public DateTime? LogicCreatedDate { get; set; }
         public DateTime? LogicModifiedDate { get; set; }
 
-        //public List<AltUnit> altUnits { get; set; }
+        public List<AltUnit> altUnits { get; set; }
 
 
     }
