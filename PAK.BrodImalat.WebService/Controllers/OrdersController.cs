@@ -155,8 +155,8 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-        [Route("putstatu/{id}")]
-        [HttpPut]
+        //[Route("putstatu/{id}")]
+        [HttpPut("putstatu/{id}")]
         public IActionResult PutStatu(int id, [FromBody] Order model)
         {
             if (ModelState.IsValid)
