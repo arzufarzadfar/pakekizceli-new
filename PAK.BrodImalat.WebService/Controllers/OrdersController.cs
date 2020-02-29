@@ -184,31 +184,6 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
-        ////////////////[Route("putstatu/{id}")]
-        ////////////////[HttpPut]
-        ////////////////public IActionResult PutStatu(int id, [FromBody] Order model)
-        ////////////////{
-        ////////////////    if (model==null || model.Id!=id)
-        ////////////////    {
-
-        ////////////////        return BadRequest();
-
-        ////////////////    }
-
-        ////////////////    var item = _context.orders.Find(id);
-        ////////////////    if (item==null)
-        ////////////////    {
-        ////////////////        return NotFound();
-        ////////////////    }
-        ////////////////    item.Statu = model.Statu;
-        ////////////////    _context.SaveChanges();
-        ////////////////    return Ok(item);
-
-
-
-        ////////////////}
-
-
 
 
 
