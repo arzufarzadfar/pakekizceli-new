@@ -13,6 +13,6 @@ namespace PAK.BrodImalat.WebService.Models
         public string Name { get; set; }
 
 
-        public List<Order> orders { get; set; }
+        ////public List<Order> orders { get; set; }
     }
 }

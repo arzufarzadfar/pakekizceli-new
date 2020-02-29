@@ -65,8 +65,8 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
-        [Route("getbeforedyeing")]
-        [HttpGet]
+        //[Route("getbeforedyeing")]
+        [HttpGet("getbeforedyeing")]
         public async Task<ActionResult<OrderDetail>> getbeforedyeing()
         {
 
@@ -118,8 +118,8 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-        [Route("getbeforeclose")]
-        [HttpGet]
+        //[Route("getbeforeclose")]
+        [HttpGet("getbeforeclose")]
         public async Task<ActionResult<OrderDetail>> getbeforeclose()
         {
 

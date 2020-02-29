@@ -23,7 +23,7 @@ namespace PAK.BrodImalat.WebService.Models
 
         public Status status { get; set; }
 
-        public List<OrderDetail> orderDetails { get; set; }
+        //public List<OrderDetail> orderDetails { get; set; }
 
 
     }

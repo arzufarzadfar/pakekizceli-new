@@ -217,10 +217,13 @@ namespace PAK.BrodImalat.WebService.Controllers
 
         //[Route("logout/{id}")]
        
-        [HttpPut("logout/{id}")]
+        [HttpPut("logout")]
 
-        public IActionResult logout(string id, [FromBody] TokenResource model)
+        public IActionResult logout([FromBody] TokenResource model)
         {
+
+            //using (var tok= new _con)
+
             if (ModelState.IsValid)
             {
 
