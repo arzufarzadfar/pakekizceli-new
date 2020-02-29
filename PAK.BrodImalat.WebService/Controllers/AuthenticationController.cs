@@ -40,6 +40,10 @@ namespace PAK.BrodImalat.WebService.Controllers
         [HttpPost]
         public async Task<ActionResult> InsertUser([FromBody] RegisterViewModel model)
         {
+
+
+
+
             ApplicationUser user1 = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
@@ -116,38 +120,50 @@ namespace PAK.BrodImalat.WebService.Controllers
                         );
 
 
+                // var item = _context.TokenResource.Find(user.Email);
+                 var item = _context.TokenResource.Select(x => x.Token == user.Email).ToList();
+               
+
+                if (item.Count != 0)
+                {
+                    return BadRequest();
+                }
+
                 if (ModelState.IsValid)
                 {
 
-
+              
                     TokenController tokenuser = new TokenController(_context);
                     TokenResource tok1 = new TokenResource();
                     tok1.Id = user.Id;
-                    tok1.Token = new JwtSecurityTokenHandler().WriteToken(token);
-                   
+                    tok1.Token = user.Email;
+
                     tok1.mod = 1;
                     tokenuser.posttoken(tok1);
+
 
 
                 }
 
 
-                return Ok(new
-                {
+
+                    return Ok(new
+                    {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
                         expiration = token.ValidTo,
 
-                    firstName = user.firsName,
-                    lastName = user.lastName,
-                    Id = user.Id,
+                        firstName = user.firsName,
+                        lastName = user.lastName,
+                        Id = user.Id,
 
 
-            }); 
-
+                    });
+                
           
             }
             else
                 {
+                
                     return BadRequest(new
                     {
 
@@ -158,9 +174,6 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
         }
-
-
-
 
         [HttpGet("getuser")]
         public ActionResult<string> getuser()
@@ -186,8 +199,6 @@ namespace PAK.BrodImalat.WebService.Controllers
             return BadRequest("404");
 
         }
-
-
 
         [HttpGet("gettoken")]
         public ActionResult<string> gettoken()

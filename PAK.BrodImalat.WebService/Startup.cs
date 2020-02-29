@@ -108,7 +108,7 @@ namespace PAK.BrodImalat.WebService
 
 
 
-            SeedData.Add(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
+           /// SeedData.Add(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
@@ -120,8 +120,8 @@ namespace PAK.BrodImalat.WebService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-                ////endpoints.MapDefaultControllerRoute();
+                ////endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
 
             });
         }
