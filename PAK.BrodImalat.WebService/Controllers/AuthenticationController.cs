@@ -218,20 +218,41 @@ namespace PAK.BrodImalat.WebService.Controllers
         //[Route("logout/{id}")]
        
       
+          ///  for update mod
+        ////////////[Route("logout/{id}")]
+        ////////////[HttpPut]
+        ////////////public IActionResult PutStatu(string id, [FromBody] TokenResource model)
+        ////////////{
+
+        ////////////    if (model == null || model.Id != id)
+        ////////////    {
+
+
+        ////////////        return BadRequest();
+
+
+        ////////////    }
+
+        ////////////    var item = _context.TokenResource.Find(id);
+        ////////////    if (item == null)
+        ////////////    {
+        ////////////        return NotFound();
+        ////////////    }
+
+        ////////////    item.mod = model.mod;
+
+        ////////////    _context.TokenResource.Update(item);
+        ////////////    _context.SaveChanges();
+        ////////////    return Ok(item);
+        ////////////}
+
+
+     ////// for delete tokenuser
 
         [Route("logout/{id}")]
-        [HttpPut]
-        public IActionResult PutStatu(string id, [FromBody] TokenResource model)
+        [HttpDelete]
+        public IActionResult logout(string id)
         {
-
-            if (model == null || model.Id != id)
-            {
-
-
-                return BadRequest();
-
-
-            }
 
             var item = _context.TokenResource.Find(id);
             if (item == null)
@@ -239,14 +260,11 @@ namespace PAK.BrodImalat.WebService.Controllers
                 return NotFound();
             }
 
-            item.mod = model.mod;
 
-            _context.TokenResource.Update(item);
+            _context.TokenResource.Remove(item);
             _context.SaveChanges();
-            return Ok(item);
+            return Ok();
         }
-
-
 
 
     }
