@@ -217,35 +217,33 @@ namespace PAK.BrodImalat.WebService.Controllers
 
         //[Route("logout/{id}")]
        
-        [HttpPut("logout")]
+      
 
-        public IActionResult logout([FromBody] TokenResource model)
+        [Route("logout/{id}")]
+        [HttpPut]
+        public IActionResult PutStatu(string id, [FromBody] TokenResource model)
         {
 
-            //using (var tok= new _con)
-
-            if (ModelState.IsValid)
+            if (model == null || model.Id != id)
             {
 
-                var usertoken = new TokenResource
-                {
 
-                    mod = model.mod
+                return BadRequest();
 
-                };
-
-
-                _context.TokenResource.Update(usertoken);
-                _context.SaveChanges();
-                return Ok(usertoken);
-            }
-            else
-            {
-                return BadRequest(ModelState);
 
             }
 
+            var item = _context.TokenResource.Find(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
 
+            item.mod = model.mod;
+
+            _context.TokenResource.Update(item);
+            _context.SaveChanges();
+            return Ok(item);
         }
 
 
