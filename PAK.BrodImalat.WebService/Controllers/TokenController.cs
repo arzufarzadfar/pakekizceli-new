@@ -59,6 +59,56 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
+
+        ////////public async Task<ActionResult<TokenResource>> puttoken(string id ,TokenResource tokenResource)
+        ////////{
+
+        ////////    var item = _context.TokenResource.Find(id);
+        ////////    if (item == null)
+        ////////    {
+        ////////        return NotFound();
+        ////////    }
+
+        ////////    item.expires = tokenResource.expires;
+
+        ////////    _context.TokenResource.Update(item);
+        ////////    _context.SaveChanges();
+        ////////    return Ok(item);
+        ////////}
+
+
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> puttoken(int id, TokenResource tokenResource)
+        {
+           
+
+            _context.Entry(tokenResource).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!puttokenexit(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool puttokenexit(int id)
+        {
+            return _context.TokenResource.Any(e => e.Id == id);
+        }
        
     }
 }

@@ -89,7 +89,17 @@ namespace PAK.BrodImalat.WebService.Controllers
             }
             else
             {
-                return Ok(getbeforedyeingvalue());    
+
+                TokenController tokenuser = new TokenController(_context);
+                TokenResource tok1 = new TokenResource();
+               
+
+                tok1.expires = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20);
+               
+                tokenuser.puttoken(tok1);
+
+                return Ok(getbeforedyeingvalue());
+
 
             }
 
