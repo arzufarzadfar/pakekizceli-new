@@ -155,7 +155,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
         [Route("putstatu/{id}")]
-        [HttpPut]
+        [HttpPatch]
         public IActionResult PutStatu(int id, [FromBody] Order model)
         {
 

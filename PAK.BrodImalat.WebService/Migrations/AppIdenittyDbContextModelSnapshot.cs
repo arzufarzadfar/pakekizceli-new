@@ -475,6 +475,9 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("expires")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("mod")
                         .HasColumnType("int");
 
@@ -537,33 +540,33 @@ namespace PAK.BrodImalat.WebService.Migrations
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.AltUnit", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.MainUnit", "MainUnit")
-                        .WithMany("altUnits")
+                        .WithMany()
                         .HasForeignKey("MainUnitId");
                 });
 
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.Order", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.Client", "Client")
-                        .WithMany("orders")
+                        .WithMany()
                         .HasForeignKey("ClientId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Status", "status")
-                        .WithMany("order")
+                        .WithMany()
                         .HasForeignKey("statusId");
                 });
 
             modelBuilder.Entity("PAK.BrodImalat.WebService.Models.OrderDetail", b =>
                 {
                     b.HasOne("PAK.BrodImalat.WebService.Models.AltUnit", "AltUnit")
-                        .WithMany("orderDetails")
+                        .WithMany()
                         .HasForeignKey("AltUnitId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Item", "Item")
-                        .WithMany("orderDetails")
+                        .WithMany()
                         .HasForeignKey("ItemId");
 
                     b.HasOne("PAK.BrodImalat.WebService.Models.Order", "Order")
-                        .WithMany("orderDetails")
+                        .WithMany()
                         .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618

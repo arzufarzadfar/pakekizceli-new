@@ -24,7 +24,7 @@ namespace PAK.BrodImalat.WebService.Controllers
     {
 
            private UserManager<ApplicationUser> userManager;
-        private readonly AppIdenittyDbContext _context;
+           private readonly AppIdenittyDbContext _context;
 
 
 
@@ -33,15 +33,13 @@ namespace PAK.BrodImalat.WebService.Controllers
         public AuthenticationController(UserManager<ApplicationUser> userManager, AppIdenittyDbContext _context)
             {
                 this.userManager = userManager;
-            this._context = _context;
+                this._context = _context;
         }
 
         [Route("register")]
         [HttpPost]
         public async Task<ActionResult> InsertUser([FromBody] RegisterViewModel model)
         {
-
-
 
 
             ApplicationUser user1 = new ApplicationUser()
@@ -89,11 +87,8 @@ namespace PAK.BrodImalat.WebService.Controllers
 
                     new Claim (JwtRegisteredClaimNames.Email, user.Email ),
                     new Claim (JwtRegisteredClaimNames.NameId, user.Id ),
-
-                      new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    
-
-                        new Claim ("iid","200")
+                    new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim ("iid","200")
 
 
                   };
@@ -104,12 +99,10 @@ namespace PAK.BrodImalat.WebService.Controllers
                     {
                         claims.Add(new Claim(ClaimTypes.Role, role));
 
-
-
                     }
 
                     var singinkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("AtasayarTeknoloji"));
-
+                  
                     var token = new JwtSecurityToken(
 
                         issuer: "https://localhost:51177",
@@ -126,6 +119,8 @@ namespace PAK.BrodImalat.WebService.Controllers
 
                 if (item.Count != 0)
                 {
+                   
+
                     return BadRequest();
                 }
 
@@ -136,8 +131,9 @@ namespace PAK.BrodImalat.WebService.Controllers
                     TokenController tokenuser = new TokenController(_context);
                     TokenResource tok1 = new TokenResource();
                     tok1.Id = user.Id;
-                    tok1.Token = user.Email;
 
+                    tok1.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                    tok1.expires = DateTime.Now.AddMinutes(20);
                     tok1.mod = 1;
                     tokenuser.posttoken(tok1);
 
@@ -190,6 +186,9 @@ namespace PAK.BrodImalat.WebService.Controllers
                     Exception = $"OK:{ emailclime.Value}"
 
                 });
+
+
+
 
 
             }

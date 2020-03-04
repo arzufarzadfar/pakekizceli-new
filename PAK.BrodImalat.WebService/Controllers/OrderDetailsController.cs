@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PAK.BrodImalat.WebService.Data;
 using PAK.BrodImalat.WebService.Models;
+using PAK.BrodImalat.WebService.ModelsTokenUser;
 
 namespace PAK.BrodImalat.WebService.Controllers
 {
@@ -67,13 +69,41 @@ namespace PAK.BrodImalat.WebService.Controllers
 
         //[Route("getbeforedyeing")]
         [HttpGet("getbeforedyeing")]
-        public async Task<ActionResult<OrderDetail>> getbeforedyeing()
+
+
+        public ActionResult<string> getbeforedyeing([FromHeader]string token)
         {
 
 
-            var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 2)
+            var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+
+
+               // var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.mod == 0))).ToList();
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+            if (tokencontrol.Count == 0)
+            {
+
+                return BadRequest("404");
+            }
+            else
+            {
+                return Ok(getbeforedyeingvalue());    
+
+            }
+
+
+        }
+
+        [HttpGet("getbeforedyeingvalue")]
+
+
+        public async Task<ActionResult<OrderDetail>> getbeforedyeingvalue()
+        {
+            var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 3)
                 .Include(p => p.Order)
-                .Include(p=>p.Item)
+                .Include(p => p.Item)
 
 
                 .ToList();
@@ -87,6 +117,9 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             return Ok(neworder1);
         }
+
+
+
 
 
 

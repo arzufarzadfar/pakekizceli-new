@@ -93,7 +93,7 @@ namespace PAK.BrodImalat.WebService
 
             services.AddDbContext<GO3DbContext>(opts2 => opts2.UseSqlServer(Configuration["ConnectionString:MyConnection2"]));
 
-            services.AddDbContext<PakEkizcelibrode2Context>(opts2 => opts2.UseSqlServer(Configuration["ConnectionString:MyConnection"]));
+            ////services.AddDbContext<PakEkizcelibrode2Context>(opts2 => opts2.UseSqlServer(Configuration["ConnectionString:MyConnection"]));
 
 
         }
@@ -108,10 +108,10 @@ namespace PAK.BrodImalat.WebService
 
 
 
-           /// SeedData.Add(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
+           SeedData.Add(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
 
             app.UseAuthentication();
-            app.UseHttpsRedirection();
+           //////// app.UseHttpsRedirection();
           
             app.UseRouting();
             app.UseCors("MyPolicy");
