@@ -14,6 +14,7 @@ namespace PAK.BrodImalat.WebService.ModelsTokenUser
         public string Token { get; set; }
         public int mod { get; set; }
         public DateTime expires { get; set; }
+        public string email { get; set; }
 
 
     }

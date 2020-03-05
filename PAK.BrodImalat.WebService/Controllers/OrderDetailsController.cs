@@ -125,10 +125,12 @@ namespace PAK.BrodImalat.WebService.Controllers
         [HttpGet("getbeforedyeing")]
 
 
-        public ActionResult<string> getbeforedyeing([FromHeader]string token)
+        public async Task<ActionResult<OrderDetail>> getbeforedyeing([FromHeader]string token)
         {
             try
             {
+               
+
 
                 var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
 
@@ -172,8 +174,6 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
        
-       
-        
 
         [HttpGet("getbeforedyeingvalue")]
 
@@ -195,6 +195,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
         /// ////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////
         /// ///////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -320,10 +321,6 @@ namespace PAK.BrodImalat.WebService.Controllers
             }
         }
 
-
-
-
-
         //[Route("getbeforeclose")]
        // [HttpGet("getbeforeclosevalue")]
         [HttpGet]
@@ -390,14 +387,11 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             }
 
-
             }
             catch
             {
                 return NotFound();
             }
-
-
 
         }
 
@@ -433,7 +427,6 @@ namespace PAK.BrodImalat.WebService.Controllers
         {
             try
             {
-
 
                 var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
 

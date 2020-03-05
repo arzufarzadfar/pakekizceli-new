@@ -114,7 +114,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
                 // var item = _context.TokenResource.Find(user.Email);
-                 var item = _context.TokenResource.Select(x => x.Token == user.Email).ToList();
+                 var item = _context.TokenResource.Where(x => x.email == user.Email).ToList();
                
 
                 if (item.Count != 0)
@@ -135,6 +135,7 @@ namespace PAK.BrodImalat.WebService.Controllers
                     tok1.Token = new JwtSecurityTokenHandler().WriteToken(token);
                     tok1.expires = DateTime.Now.AddMinutes(20);
                     tok1.mod = 1;
+                    tok1.email = user.Email;
                     tokenuser.posttoken(tok1);
 
 

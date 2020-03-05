@@ -475,6 +475,9 @@ namespace PAK.BrodImalat.WebService.Migrations
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("expires")
                         .HasColumnType("datetime2");
 
