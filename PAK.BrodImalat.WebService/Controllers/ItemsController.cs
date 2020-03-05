@@ -151,20 +151,20 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
         // DELETE: api/Items/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Item>> DeleteItem(int id)
-        {
-            var item = await _context.items.FindAsync(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
+        //////[HttpDelete("{id}")]
+        //////public async Task<ActionResult<Item>> DeleteItem(int id)
+        //////{
+        //////    var item = await _context.items.FindAsync(id);
+        //////    if (item == null)
+        //////    {
+        //////        return NotFound();
+        //////    }
 
-            _context.items.Remove(item);
-            await _context.SaveChangesAsync();
+        //////    _context.items.Remove(item);
+        //////    await _context.SaveChangesAsync();
 
-            return item;
-        }
+        //////    return item;
+        //////}
 
         private bool ItemExists(int id)
         {

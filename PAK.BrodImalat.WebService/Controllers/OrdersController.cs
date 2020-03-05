@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,8 +43,64 @@ namespace PAK.BrodImalat.WebService.Controllers
             return order;
         }
 
+
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////
+
         [HttpGet("getneworder")]
-        public async Task<ActionResult<Order>> Get(int id)
+
+        public ActionResult<string> GetNewOrder([FromHeader]string token)
+        {
+            try
+            {
+
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+                if (tokencontrol.Count == 0)
+                {
+
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+
+                _context.TokenResource.Remove(item);
+                _context.SaveChanges();
+
+                return BadRequest("404");
+            }
+            else
+            {
+                TokenController tokenuser = new TokenController(_context);
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                item.Id = userid;
+                item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                _context.TokenResource.Update(item);
+                _context.SaveChanges();
+                return Ok(GetNewOrdervalue());
+
+            }
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+
+
+
+       // [HttpGet("getneworder")]
+        [HttpGet]
+        public async Task<ActionResult<Order>> GetNewOrdervalue()
         {
 
            
@@ -61,10 +118,64 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// 
 
 
         [HttpGet("getinprogressorder")]
-        public async Task<ActionResult<Order>> Getinprogress(int id)
+
+        public ActionResult<string> Getinprogress([FromHeader]string token)
+        {
+            try
+            {
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+                if (tokencontrol.Count == 0)
+                {
+
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+
+                _context.TokenResource.Remove(item);
+                _context.SaveChanges();
+
+                return BadRequest("404");
+            }
+            else
+            {
+                TokenController tokenuser = new TokenController(_context);
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                item.Id = userid;
+                item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                _context.TokenResource.Update(item);
+                _context.SaveChanges();
+                return Ok(Getinprogressvalue());
+
+            }
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+
+
+
+      //  [HttpGet("getinprogressorder")]
+        [HttpGet]
+        public async Task<ActionResult<Order>> Getinprogressvalue()
         {
 
 
@@ -83,11 +194,61 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
-
-
+        /// /////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet("getcompletedorder")]
-        public async Task<ActionResult<Order>> Getcompletedorder(int id)
+        public ActionResult<string> Getcompletedorder([FromHeader]string token)
+        {
+            try
+            {
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+                if (tokencontrol.Count == 0)
+                {
+
+                    var item = _context.TokenResource.Find(userid);
+                    if (item == null)
+                    {
+                        return NotFound();
+                    }
+
+
+                    _context.TokenResource.Remove(item);
+                    _context.SaveChanges();
+
+                    return BadRequest("404");
+                }
+                else
+                {
+                    TokenController tokenuser = new TokenController(_context);
+                    var item = _context.TokenResource.Find(userid);
+                    if (item == null)
+                    {
+                        return NotFound();
+                    }
+                    item.Id = userid;
+                    item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                    _context.TokenResource.Update(item);
+                    _context.SaveChanges();
+                    return Ok(Getinprogressvalue());
+
+                }
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+        }
+
+
+
+       // [HttpGet("getcompletedorder")]
+        [HttpGet]
+        public async Task<ActionResult<Order>> Getcompletedordervalue(int id)
         {
 
 
@@ -104,8 +265,10 @@ namespace PAK.BrodImalat.WebService.Controllers
             return Ok(neworder1);
         }
 
-
-        // GET: api/Orders/byOrder/5
+       
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////
+      
         [HttpGet("byOrder/{id}")]
         public Order GetOrderByOrder(int id)
         {
@@ -154,18 +317,22 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
+
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
         [Route("putstatu/{id}")]
-        [HttpPatch]
-        public IActionResult PutStatu(int id, [FromBody] Order model)
+        //[HttpPatch]
+        public IActionResult PutStatuvalue(int id, [FromBody] Order model)
         {
 
             if (model == null || model.Id != id)
             {
 
-
                 return BadRequest();
-
-
             }
 
             var item = _context.orders.Find(id);
@@ -183,18 +350,12 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-
-
-
         // POST: api/Orders
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
-
-
-
 
             _context.orders.Add(order);
             _context.Database.OpenConnection();
@@ -224,20 +385,7 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
         // DELETE: api/Orders/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Order>> DeleteOrder(int id)
-        {
-            var order = await _context.orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            _context.orders.Remove(order);
-            await _context.SaveChangesAsync();
-
-            return order;
-        }
+       
 
         private bool OrderExists(int id)
         {

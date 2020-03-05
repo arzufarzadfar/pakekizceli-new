@@ -44,12 +44,63 @@ namespace PAK.BrodImalat.WebService.Controllers
             return orderDetail;
         }
 
-
         // GET: api/OrderDetails/getOrders
+
+
+
+
+        /// //////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////
 
         [Route("getorders")]
         [HttpGet]
-        public async Task<ActionResult<OrderDetail>> getorder()
+
+        public ActionResult<string> getorder([FromHeader]string token)
+        {
+
+
+            var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+            var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+            if (tokencontrol.Count == 0)
+            {
+
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+
+                _context.TokenResource.Remove(item);
+                _context.SaveChanges();
+
+                return BadRequest("404");
+            }
+            else
+            {
+                TokenController tokenuser = new TokenController(_context);
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                item.Id = userid;
+                item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                _context.TokenResource.Update(item);
+                _context.SaveChanges();
+                return Ok(getordervalue());
+
+            }
+        }
+
+
+
+
+      ///  [Route("getorders")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getordervalue()
         {
             var orderDetail = await _context.orderDetails
                 .Include(p => p.Order)
@@ -66,45 +117,63 @@ namespace PAK.BrodImalat.WebService.Controllers
             return Ok(orderDetail);
         }
 
-
+        
+        /// ////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////
+      
         //[Route("getbeforedyeing")]
         [HttpGet("getbeforedyeing")]
 
 
         public ActionResult<string> getbeforedyeing([FromHeader]string token)
         {
+            try
+            {
 
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
 
-            var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
-
-
-
-               // var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.mod == 0))).ToList();
                 var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
 
-            if (tokencontrol.Count == 0)
-            {
+                if (tokencontrol.Count == 0)
+                {
 
-                return BadRequest("404");
+                    var item = _context.TokenResource.Find(userid);
+                    if (item == null)
+                    {
+                        return NotFound();
+                    }
+
+
+                    _context.TokenResource.Remove(item);
+                    _context.SaveChanges();
+
+                    return BadRequest("404");
+                }
+                else
+                {
+                    TokenController tokenuser = new TokenController(_context);
+                    var item = _context.TokenResource.Find(userid);
+                    if (item == null)
+                    {
+                        return NotFound();
+                    }
+                    item.Id = userid;
+                    item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                    _context.TokenResource.Update(item);
+                    _context.SaveChanges();
+                    return Ok(getbeforedyeingvalue());
+
+                }
             }
-            else
+            catch
             {
-
-                TokenController tokenuser = new TokenController(_context);
-                TokenResource tok1 = new TokenResource();
-               
-
-                tok1.expires = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20);
-               
-                tokenuser.puttoken(tok1);
-
-                return Ok(getbeforedyeingvalue());
-
-
+                return NotFound();
             }
-
-
         }
+
+       
+       
+        
 
         [HttpGet("getbeforedyeingvalue")]
 
@@ -114,11 +183,7 @@ namespace PAK.BrodImalat.WebService.Controllers
             var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 3)
                 .Include(p => p.Order)
                 .Include(p => p.Item)
-
-
                 .ToList();
-
-
 
             if (neworder1 == null)
             {
@@ -129,26 +194,71 @@ namespace PAK.BrodImalat.WebService.Controllers
         }
 
 
-
-
-
-
+        /// ////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////
 
 
         [Route("getafterdyeing")]
         [HttpGet]
-        public async Task<ActionResult<OrderDetail>> getafterdyeing()
+        public ActionResult<string> getafterdyeing([FromHeader]string token)
+        {
+
+            try
+            {
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+                if (tokencontrol.Count == 0)
+                {
+
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+
+                _context.TokenResource.Remove(item);
+                _context.SaveChanges();
+
+                return BadRequest("404");
+            }
+            else
+            {
+                TokenController tokenuser = new TokenController(_context);
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                item.Id = userid;
+                item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                _context.TokenResource.Update(item);
+                _context.SaveChanges();
+                return Ok(getafterdyeingvalue());
+
+            }
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+
+
+
+       // [Route("getafterdyeingvalue")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getafterdyeingvalue()
         {
 
 
             var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 3)
                 .Include(p => p.Order)
                 .Include(p => p.Item)
-
-
                 .ToList();
-
-
 
             if (neworder1 == null)
             {
@@ -157,24 +267,73 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             return Ok(neworder1);
         }
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////
+
+        [HttpGet("getbeforeclose")]
+       // [HttpGet]
+
+        public ActionResult<string> getbeforeclose([FromHeader]string token)
+        {
+
+            try
+            {
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+                if (tokencontrol.Count == 0)
+                {
+
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+
+                _context.TokenResource.Remove(item);
+                _context.SaveChanges();
+
+                return BadRequest("404");
+            }
+            else
+            {
+                TokenController tokenuser = new TokenController(_context);
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                item.Id = userid;
+                item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                _context.TokenResource.Update(item);
+                _context.SaveChanges();
+                return Ok(getbeforeclosevalue());
+
+            }
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
 
 
 
 
         //[Route("getbeforeclose")]
-        [HttpGet("getbeforeclose")]
-        public async Task<ActionResult<OrderDetail>> getbeforeclose()
+       // [HttpGet("getbeforeclosevalue")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getbeforeclosevalue()
         {
-
 
             var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 4)
                 .Include(p => p.Order)
                 .Include(p => p.Item)
-
-
                 .ToList();
-
-
 
             if (neworder1 == null)
             {
@@ -186,20 +345,72 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
+        /// /////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////
+
         [Route("getafterclose")]
         [HttpGet]
-        public async Task<ActionResult<OrderDetail>> getafterclose()
+
+        public ActionResult<string> getafterclose([FromHeader]string token)
+        {
+            try
+            {
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+                if (tokencontrol.Count == 0)
+                {
+
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+
+                _context.TokenResource.Remove(item);
+                _context.SaveChanges();
+
+                return BadRequest("404");
+            }
+            else
+            {
+                TokenController tokenuser = new TokenController(_context);
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                item.Id = userid;
+                item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                _context.TokenResource.Update(item);
+                _context.SaveChanges();
+                return Ok(getafterclosevalue());
+
+            }
+
+
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+
+
+        }
+
+      //  [Route("getafterclosevalue")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getafterclosevalue()
         {
 
 
             var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 5)
                 .Include(p => p.Order)
                 .Include(p => p.Item)
-
-
                 .ToList();
-
-
 
             if (neworder1 == null)
             {
@@ -212,21 +423,72 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
+        /// /////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////
 
         [Route("getaftersendpaket")]
         [HttpGet]
-        public async Task<ActionResult<OrderDetail>> getaftersendpaket()
+
+        public ActionResult<string> getaftersendpaket([FromHeader]string token)
         {
+            try
+            {
 
 
+                var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+                var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+                if (tokencontrol.Count == 0)
+                {
+
+                    var item = _context.TokenResource.Find(userid);
+                    if (item == null)
+                    {
+                        return NotFound();
+                    }
+
+
+                    _context.TokenResource.Remove(item);
+                    _context.SaveChanges();
+
+                    return BadRequest("404");
+                }
+                else
+                {
+                    TokenController tokenuser = new TokenController(_context);
+                    var item = _context.TokenResource.Find(userid);
+                    if (item == null)
+                    {
+                        return NotFound();
+                    }
+                    item.Id = userid;
+                    item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                    _context.TokenResource.Update(item);
+                    _context.SaveChanges();
+                    return Ok(getaftersendpaketvalue());
+
+                }
+
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+        }
+
+
+
+
+        //[Route("getaftersendpaket")]
+        [HttpGet]
+        public async Task<ActionResult<OrderDetail>> getaftersendpaketvalue()
+        {
             var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 6)
                 .Include(p => p.Order)
                 .Include(p => p.Item)
-
-
                 .ToList();
-
-
 
             if (neworder1 == null)
             {
@@ -235,6 +497,13 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             return Ok(neworder1);
         }
+
+
+
+        /// ///////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////
+        /// 
+
 
 
         [HttpGet("byOrder/{id}")]
@@ -251,6 +520,12 @@ namespace PAK.BrodImalat.WebService.Controllers
 
             return orderDetail.ToList();
         }
+
+
+
+
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

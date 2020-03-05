@@ -143,20 +143,20 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
         // DELETE: api/MainUnits/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<MainUnit>> DeleteMainUnit(int id)
-        {
-            var mainUnit = await _context.mainUnits.FindAsync(id);
-            if (mainUnit == null)
-            {
-                return NotFound();
-            }
+        //////[HttpDelete("{id}")]
+        //////public async Task<ActionResult<MainUnit>> DeleteMainUnit(int id)
+        //////{
+        //////    var mainUnit = await _context.mainUnits.FindAsync(id);
+        //////    if (mainUnit == null)
+        //////    {
+        //////        return NotFound();
+        //////    }
 
-            _context.mainUnits.Remove(mainUnit);
-            await _context.SaveChangesAsync();
+        //////    _context.mainUnits.Remove(mainUnit);
+        //////    await _context.SaveChangesAsync();
 
-            return mainUnit;
-        }
+        //////    return mainUnit;
+        //////}
 
         private bool MainUnitExists(int id)
         {
