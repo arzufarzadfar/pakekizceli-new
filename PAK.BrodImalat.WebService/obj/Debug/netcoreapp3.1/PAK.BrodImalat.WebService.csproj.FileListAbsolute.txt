@@ -1275,7 +1275,6 @@ C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.W
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Debug.dll
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\System.Text.Json.dll
-C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new_2_29_true\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\log4net.config
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new_2_29_true\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new_2_29_true\PakEkizceli-core-new\PAK.BrodImalat.WebService\bin\Debug\netcoreapp3.1\appsettings.json
@@ -1624,3 +1623,4 @@ C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PakEkizceli-core
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.csproj.CopyComplete
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.dll
 C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.pdb
+C:\Users\arzu\Desktop\PakEkizceli-core-new\PakEkizceli-core-new\PAK.BrodImalat.WebService\obj\Debug\netcoreapp3.1\PAK.BrodImalat.WebService.MvcApplicationPartsAssemblyInfo.cache

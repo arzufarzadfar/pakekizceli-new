@@ -55,7 +55,7 @@ namespace PAK.BrodImalat.WebService.Controllers
         [Route("getorders")]
         [HttpGet]
 
-        public ActionResult<string> getorder([FromHeader]string token)
+        public async Task<ActionResult<OrderDetail>> getorder([FromHeader]string token)
         {
 
 
@@ -90,7 +90,20 @@ namespace PAK.BrodImalat.WebService.Controllers
                 item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                 _context.TokenResource.Update(item);
                 _context.SaveChanges();
-                return Ok(getordervalue());
+              ///  return Ok(getordervalue());
+               var orderDetail = await _context.orderDetails
+                .Include(p => p.Order)
+                .Include(p => p.Item)
+                .Include(p => p.Order.Client)
+               .Include(p => p.AltUnit)
+                .ToListAsync();
+
+                if (orderDetail == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(orderDetail);
 
             }
         }
@@ -163,7 +176,19 @@ namespace PAK.BrodImalat.WebService.Controllers
                     item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                     _context.TokenResource.Update(item);
                     _context.SaveChanges();
-                    return Ok(getbeforedyeingvalue());
+                    // return Ok(getbeforedyeingvalue());
+
+                    var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 3)
+                    .Include(p => p.Order)
+                    .Include(p => p.Item)
+                    .ToList();
+
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
 
                 }
             }
@@ -201,7 +226,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
         [Route("getafterdyeing")]
         [HttpGet]
-        public ActionResult<string> getafterdyeing([FromHeader]string token)
+        public async Task<ActionResult<OrderDetail>> getafterdyeing([FromHeader]string token)
         {
 
             try
@@ -237,9 +262,20 @@ namespace PAK.BrodImalat.WebService.Controllers
                 item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                 _context.TokenResource.Update(item);
                 _context.SaveChanges();
-                return Ok(getafterdyeingvalue());
+                    // return Ok(getafterdyeingvalue());
+                    var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 3)
+                    .Include(p => p.Order)
+                    .Include(p => p.Item)
+                    .ToList();
 
-            }
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
+
+                }
             }
             catch
             {
@@ -273,9 +309,11 @@ namespace PAK.BrodImalat.WebService.Controllers
         /////////////////////////////////////////////////////////////////////////////////////////
 
         [HttpGet("getbeforeclose")]
-       // [HttpGet]
+        // [HttpGet]
 
-        public ActionResult<string> getbeforeclose([FromHeader]string token)
+        ////public ActionResult<string> getbeforeclose([FromHeader]string token)
+        public async Task<ActionResult<OrderDetail>> getbeforeclose([FromHeader]string token)
+
         {
 
             try
@@ -311,9 +349,19 @@ namespace PAK.BrodImalat.WebService.Controllers
                 item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                 _context.TokenResource.Update(item);
                 _context.SaveChanges();
-                return Ok(getbeforeclosevalue());
+                    // return Ok(getbeforeclosevalue());
+                    var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 4)
+                     .Include(p => p.Order)
+                     .Include(p => p.Item)
+                     .ToList();
 
-            }
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
+                }
             }
             catch
             {
@@ -348,7 +396,7 @@ namespace PAK.BrodImalat.WebService.Controllers
         [Route("getafterclose")]
         [HttpGet]
 
-        public ActionResult<string> getafterclose([FromHeader]string token)
+        public async Task<ActionResult<OrderDetail>> getafterclose([FromHeader]string token)
         {
             try
             {
@@ -383,9 +431,19 @@ namespace PAK.BrodImalat.WebService.Controllers
                 item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                 _context.TokenResource.Update(item);
                 _context.SaveChanges();
-                return Ok(getafterclosevalue());
+                    // return Ok(getafterclosevalue());
+                    var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 5)
+                   .Include(p => p.Order)
+                   .Include(p => p.Item)
+                   .ToList();
 
-            }
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
+                }
 
             }
             catch
@@ -459,7 +517,18 @@ namespace PAK.BrodImalat.WebService.Controllers
                     item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                     _context.TokenResource.Update(item);
                     _context.SaveChanges();
-                    return Ok(getaftersendpaketvalue());
+                    ////return Ok(getaftersendpaketvalue());
+                    var neworder1 = _context.orderDetails.Where(x => x.Order.statusId == 6)
+                    .Include(p => p.Order)
+                    .Include(p => p.Item)
+                    .ToList();
+
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
 
                 }
 
@@ -474,7 +543,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-        //[Route("getaftersendpaket")]
+       // [Route("getaftersendpaket")]
         [HttpGet]
         public async Task<ActionResult<OrderDetail>> getaftersendpaketvalue()
         {

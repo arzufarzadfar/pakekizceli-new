@@ -49,7 +49,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
         [HttpGet("getneworder")]
 
-        public ActionResult<string> GetNewOrder([FromHeader]string token)
+        public async Task<ActionResult<Order>> GetNewOrder([FromHeader]string token)
         {
             try
             {
@@ -87,9 +87,19 @@ namespace PAK.BrodImalat.WebService.Controllers
                 item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                 _context.TokenResource.Update(item);
                 _context.SaveChanges();
-                return Ok(GetNewOrdervalue());
+                    // return Ok(GetNewOrdervalue());
+                    var neworder1 = _context.orders.Where(x => x.statusId == 1)
+                    .Include(p => p.Client)
+                    .ToList();
 
-            }
+
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
+                }
             }
             catch
             {
@@ -117,6 +127,7 @@ namespace PAK.BrodImalat.WebService.Controllers
             }
 
             return Ok(neworder1);
+
         }
 
 
@@ -162,9 +173,20 @@ namespace PAK.BrodImalat.WebService.Controllers
                 item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                 _context.TokenResource.Update(item);
                 _context.SaveChanges();
-                return Ok(Getinprogressvalue());
+                    //return Ok(Getinprogressvalue());
+                    var neworder1 = _context.orders.Where(x => x.statusId == 2 || x.statusId == 3 || x.statusId == 4 || x.statusId == 5)
+                   .Include(p => p.Client)
 
-            }
+                   .ToList();
+
+
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
+                }
             }
             catch
             {
@@ -235,8 +257,18 @@ namespace PAK.BrodImalat.WebService.Controllers
                     item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
                     _context.TokenResource.Update(item);
                     _context.SaveChanges();
-                    return Ok(Getinprogressvalue());
+                    //return Ok(Getinprogressvalue());
+                    var neworder1 = _context.orders.Where(x => x.statusId == 6)
+               .Include(p => p.Client)
+               .ToList();
 
+
+                    if (neworder1 == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(neworder1);
                 }
             }
             catch

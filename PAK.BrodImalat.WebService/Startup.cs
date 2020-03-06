@@ -120,8 +120,8 @@ namespace PAK.BrodImalat.WebService
 
             app.UseEndpoints(endpoints =>
             {
-                ////endpoints.MapControllers();
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllers();
+               // endpoints.MapDefaultControllerRoute();
 
             });
         }
