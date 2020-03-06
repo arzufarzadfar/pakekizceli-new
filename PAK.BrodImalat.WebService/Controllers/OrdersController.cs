@@ -54,6 +54,8 @@ namespace PAK.BrodImalat.WebService.Controllers
             try
             {
 
+
+
                 var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
 
                 var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
@@ -98,7 +100,7 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-       // [HttpGet("getneworder")]
+        // [HttpGet("getneworder")]
         [HttpGet]
         public async Task<ActionResult<Order>> GetNewOrdervalue()
         {
