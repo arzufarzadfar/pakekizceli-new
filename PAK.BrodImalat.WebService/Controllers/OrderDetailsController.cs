@@ -111,7 +111,89 @@ namespace PAK.BrodImalat.WebService.Controllers
 
 
 
-      ///  [Route("getorders")]
+
+       /// [Route("getordersbyId")]
+        [HttpGet("getordersbyId")]
+
+        public async Task<ActionResult<OrderDetail>> getordersbyId([FromHeader]string token , int id)
+        {
+
+
+            var userid = (User.Claims.FirstOrDefault(x => x.Type.ToString().Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))).Value;
+
+            var tokencontrol = _context.TokenResource.Where(x => ((x.Id == userid) && (x.expires >= DateTime.Now))).ToList();
+
+            if (tokencontrol.Count == 0)
+            {
+
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+
+                _context.TokenResource.Remove(item);
+                _context.SaveChanges();
+
+                return BadRequest("404");
+            }
+            else
+            {
+                TokenController tokenuser = new TokenController(_context);
+                var item = _context.TokenResource.Find(userid);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                item.Id = userid;
+                item.expires = (DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20));
+                _context.TokenResource.Update(item);
+                _context.SaveChanges();
+                ///  return Ok(getordervalue());
+                var orderDetail = await _context.orderDetails.Where(x => x.Order.Id == id)
+
+
+                   .Include(p => p.Order)
+                   .Include(p => p.Item)
+                   .Include(p => p.Order.Client)
+                  .Include(p => p.AltUnit)
+                   .ToListAsync();
+
+                if (orderDetail == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(orderDetail);
+
+            }
+        }
+
+
+
+        [HttpGet("getii/{id}")]
+        public async Task<ActionResult<OrderDetail>> getii(int id)
+        {
+            var orderDetail = await _context.orderDetails.Where(x => x.Order.Id == id)
+
+
+                .Include(p => p.Order)
+                .Include(p => p.Item)
+                .Include(p => p.Order.Client)
+               .Include(p => p.AltUnit)
+                .ToListAsync();
+
+            if (orderDetail == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(orderDetail);
+        }
+
+
+        ///  [Route("getorders")]
         [HttpGet]
         public async Task<ActionResult<OrderDetail>> getordervalue()
         {

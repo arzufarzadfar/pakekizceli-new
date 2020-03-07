@@ -71,19 +71,23 @@ namespace PAK.BrodImalat.WebService.Controllers
            
         public async Task<IActionResult> Login( LoginModel model, string returnUrl = null)
             {
-               
-
-            ServiceResponse<LoginModel> response = new ServiceResponse<LoginModel>();
-
-                var user = await userManager.FindByNameAsync(model.UserName);  // await emza braye asankron
-                if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
-                {
 
 
-                    var userRoles = await userManager.GetRolesAsync(user);
-                   ////var userRoles1 = await userManager.getuser
+           
 
-                    var claims = new List<Claim>
+
+
+                    ServiceResponse<LoginModel> response = new ServiceResponse<LoginModel>();
+
+                    var user = await userManager.FindByNameAsync(model.UserName);  // await emza braye asankron
+                    if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+                    {
+
+
+                        var userRoles = await userManager.GetRolesAsync(user);
+                        ////var userRoles1 = await userManager.getuser
+
+                        var claims = new List<Claim>
 
                   {
 
@@ -97,83 +101,108 @@ namespace PAK.BrodImalat.WebService.Controllers
                   };
 
 
-                    foreach (var role in userRoles)
+                        foreach (var role in userRoles)
 
-                    {
-                        claims.Add(new Claim(ClaimTypes.Role, role));
+                        {
+                            claims.Add(new Claim(ClaimTypes.Role, role));
 
-                    }
+                        }
 
-                    var singinkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("AtasayarTeknoloji"));
-                  
-                    var token = new JwtSecurityToken(
+                        var singinkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("AtasayarTeknoloji"));
 
-                        issuer: "https://localhost:51177",
-                        audience: "https://localhost:51177",
-                        expires: DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20),
-                        claims: claims,
-                        signingCredentials: new SigningCredentials(singinkey, SecurityAlgorithms.HmacSha256)
-                        );
+                        var token = new JwtSecurityToken(
+
+                            issuer: "https://localhost:51177",
+                            audience: "https://localhost:51177",
+                            expires: DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).AddMinutes(20),
+                            claims: claims,
+                            signingCredentials: new SigningCredentials(singinkey, SecurityAlgorithms.HmacSha256)
+                            );
 
 
                 // var item = _context.TokenResource.Find(user.Email);
-                 var item = _context.TokenResource.Where(x => x.email == user.Email).ToList();
-               
 
-                if (item.Count != 0)
-                {
-                   
 
-                    return BadRequest();
-                }
+                   //////var tokencontrol = _context.TokenResource.Where(x => ((x.email == user.Email) && (x.expires <= DateTime.Now))).ToList();
 
-                if (ModelState.IsValid)
-                {
 
-              
+                  //////if (tokencontrol.Count != 0)
+                  //////             {
+
+                  //////              var item2 = _context.TokenResource.Find(user.Email);
+                  //////              if (item2 != null)
+                  //////                {
+
+
+                  //////                  _context.TokenResource.Remove(item2);
+                  //////                  _context.SaveChanges();
+
+
+                  //////                 }
+                  //////               }
+
+
+
+
+                var item = _context.TokenResource.Where(x => x.email == user.Email).ToList();
+
+
+                        if (item.Count != 0)
+                        {
+
+
+                            return BadRequest();
+                        }
+
+                        if (ModelState.IsValid)
+                        {
+
+
                     TokenController tokenuser = new TokenController(_context);
-                    TokenResource tok1 = new TokenResource();
-                    tok1.Id = user.Id;
+                            TokenResource tok1 = new TokenResource();
+                            tok1.Id = user.Id;
 
-                    tok1.Token = new JwtSecurityTokenHandler().WriteToken(token);
-                    tok1.expires = DateTime.Now.AddMinutes(20);
-                    tok1.mod = 1;
-                    tok1.email = user.Email;
-                    tokenuser.posttoken(tok1);
+                            tok1.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                            tok1.expires = DateTime.Now.AddMinutes(20);
+                            tok1.mod = 1;
+                            tok1.email = user.Email;
+                            tokenuser.posttoken(tok1);
 
+
+
+                        }
+
+
+
+                        return Ok(new
+                        {
+                            token = new JwtSecurityTokenHandler().WriteToken(token),
+                            expiration = token.ValidTo,
+
+                            firstName = user.firsName,
+                            lastName = user.lastName,
+                            Id = user.Id,
+
+
+                        });
+
+
+                    }
+                    else
+                    {
+
+                        return BadRequest(new
+                        {
+
+                            message = "Kulanci adi ve şifre yanliş"
+
+                        });
+                    }
 
 
                 }
-
-
-
-                    return Ok(new
-                    {
-                        token = new JwtSecurityTokenHandler().WriteToken(token),
-                        expiration = token.ValidTo,
-
-                        firstName = user.firsName,
-                        lastName = user.lastName,
-                        Id = user.Id,
-
-
-                    });
-                
-          
-            }
-            else
-                {
-                
-                    return BadRequest(new
-                    {
-
-                        message = "Kulanci adi ve şifre yanliş"
-
-                    });
-                }
-
-
-        }
+            
+           
 
         [HttpGet("getuser")]
         public ActionResult<string> getuser()

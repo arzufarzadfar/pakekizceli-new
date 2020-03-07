@@ -14,7 +14,9 @@
       "launchUrl": "weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "sqlDebugging": true,
+      "nativeDebugging": false
     },
     "PAK.BrodImalat.WebService": {
       "commandName": "Project",
