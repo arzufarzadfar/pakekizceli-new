@@ -73,8 +73,6 @@ namespace PAK.BrodImalat.WebService.Controllers
             {
 
 
-           
-
 
 
                     ServiceResponse<LoginModel> response = new ServiceResponse<LoginModel>();
@@ -123,23 +121,23 @@ namespace PAK.BrodImalat.WebService.Controllers
                 // var item = _context.TokenResource.Find(user.Email);
 
 
-                   //////var tokencontrol = _context.TokenResource.Where(x => ((x.email == user.Email) && (x.expires <= DateTime.Now))).ToList();
+                var tokencontrol = _context.TokenResource.Where(x => ((x.email == user.Email) && (x.expires <= DateTime.Now))).ToList();
 
 
-                  //////if (tokencontrol.Count != 0)
-                  //////             {
+                if (tokencontrol.Count != 0)
+                {
 
-                  //////              var item2 = _context.TokenResource.Find(user.Email);
-                  //////              if (item2 != null)
-                  //////                {
-
-
-                  //////                  _context.TokenResource.Remove(item2);
-                  //////                  _context.SaveChanges();
+                    var item2 = _context.TokenResource.Find(user.Id);
+                    if (item2 != null)
+                    {
 
 
-                  //////                 }
-                  //////               }
+                        _context.TokenResource.Remove(item2);
+                        _context.SaveChanges();
+
+
+                    }
+                }
 
 
 
